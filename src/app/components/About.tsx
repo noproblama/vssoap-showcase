@@ -1,7 +1,15 @@
+import { DecorativeCircles, DecorativeWave } from './DecorativeElements';
+
 export function About() {
   return (
-    <section className="py-20 px-6 bg-stone-50" id="about">
-      <div className="max-w-4xl mx-auto">
+    <section className="relative py-20 px-6 bg-stone-50 overflow-hidden" id="about">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 pointer-events-none opacity-15">
+        <DecorativeCircles className="absolute top-20 right-10 w-24 h-24" />
+        <DecorativeWave className="absolute bottom-20 left-0 w-48 h-24" />
+      </div>
+
+      <div className="relative z-10 max-w-4xl mx-auto">
         <h2 className="text-4xl md:text-5xl text-center mb-12 text-stone-800">
           Про майстриню
         </h2>

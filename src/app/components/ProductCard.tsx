@@ -1,4 +1,5 @@
-import { ImageWithFallback } from './ImageWithFallback';
+import { SoapPlaceholder } from './SoapPlaceholder';
+import { ImageWithFallback } from './figma/ImageWithFallback';
 
 interface Product {
   id: number;
@@ -11,21 +12,32 @@ interface Product {
 
 interface ProductCardProps {
   product: Product;
+  onClick?: () => void;
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, onClick }: ProductCardProps) {
   const isPremium = product.category === 'premium';
 
   return (
-    <div className="group relative bg-stone-50 rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+    <div
+      className="group relative bg-stone-50 rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+      onClick={onClick}
+    >
       <div className="relative aspect-square overflow-hidden bg-stone-100">
-        <ImageWithFallback
-          src={product.image}
-          alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
+        {product.image.startsWith('/src/imports/') ? (
+          <ImageWithFallback
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        ) : (
+          <SoapPlaceholder
+            name={product.name}
+            className="w-full h-full group-hover:scale-105 transition-transform duration-500"
+          />
+        )}
         {isPremium && (
-          <div className="absolute top-4 right-4 bg-amber-600 text-white px-3 py-1 rounded-full text-sm">
+          <div className="absolute top-4 right-4 bg-sage-700 text-white px-3 py-1 rounded-full text-sm z-10">
             Premium
           </div>
         )}
@@ -36,7 +48,7 @@ export function ProductCard({ product }: ProductCardProps) {
           <h3 className="text-2xl text-stone-800">
             {product.name}
           </h3>
-          <span className="text-xl text-amber-700">
+          <span className="text-xl text-sage-700">
             {product.price}
           </span>
         </div>

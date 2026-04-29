@@ -79,6 +79,16 @@
 }
 
 @theme inline {
+  --color-sage-50: #f6f7f4;
+  --color-sage-100: #e8ebe3;
+  --color-sage-200: #d4d9ca;
+  --color-sage-300: #b8c0a9;
+  --color-sage-400: #9aa88a;
+  --color-sage-500: #7d8e6e;
+  --color-sage-600: #657356;
+  --color-sage-700: #4f5b45;
+  --color-sage-800: #414a39;
+  --color-sage-900: #383e31;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);

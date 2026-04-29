@@ -1,7 +1,15 @@
+import { DecorativeFlower, DecorativeWave } from './DecorativeElements';
+
 export function Contact() {
   return (
-    <section className="py-20 px-6 bg-gradient-to-b from-stone-50 to-amber-50" id="contact">
-      <div className="max-w-4xl mx-auto text-center">
+    <section className="relative py-20 px-6 bg-gradient-to-b from-stone-50 to-sage-50 overflow-hidden" id="contact">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 pointer-events-none opacity-30">
+        <DecorativeWave className="absolute top-20 right-10 w-32 h-16" />
+        <DecorativeFlower className="absolute bottom-40 left-10 w-24 h-24" />
+      </div>
+
+      <div className="relative z-10 max-w-4xl mx-auto text-center">
         <h2 className="text-4xl md:text-5xl mb-8 text-stone-800">
           Як замовити
         </h2>
@@ -16,7 +24,7 @@ export function Contact() {
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="block bg-gradient-to-r from-amber-500 to-amber-600 text-white py-4 px-8 rounded-lg hover:from-amber-600 hover:to-amber-700 transition-all text-lg"
+              className="block bg-sage-600 text-white py-4 px-8 rounded-lg hover:bg-sage-700 transition-all text-lg shadow-sm"
             >
               📸 Instagram
             </a>
@@ -25,21 +33,21 @@ export function Contact() {
               href="https://t.me"
               target="_blank"
               rel="noopener noreferrer"
-              className="block bg-gradient-to-r from-blue-500 to-blue-600 text-white py-4 px-8 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all text-lg"
+              className="block bg-sage-600 text-white py-4 px-8 rounded-lg hover:bg-sage-700 transition-all text-lg shadow-sm"
             >
               ✈️ Telegram
             </a>
 
             <a
               href="tel:+380000000000"
-              className="block bg-gradient-to-r from-green-500 to-green-600 text-white py-4 px-8 rounded-lg hover:from-green-600 hover:to-green-700 transition-all text-lg"
+              className="block bg-sage-600 text-white py-4 px-8 rounded-lg hover:bg-sage-700 transition-all text-lg shadow-sm"
             >
               📞 +380 (00) 000-00-00
             </a>
 
             <a
               href="mailto:soap@example.com"
-              className="block bg-gradient-to-r from-stone-500 to-stone-600 text-white py-4 px-8 rounded-lg hover:from-stone-600 hover:to-stone-700 transition-all text-lg"
+              className="block bg-sage-600 text-white py-4 px-8 rounded-lg hover:bg-sage-700 transition-all text-lg shadow-sm"
             >
               ✉️ soap@example.com
             </a>
@@ -51,8 +59,15 @@ export function Contact() {
         </p>
       </div>
 
-      <footer className="mt-16 text-center text-stone-500">
-        <p>© 2026 Натуральне мило ручної роботи. Створено з любов'ю в Україні 🇺🇦</p>
+      <footer className="mt-16 text-center">
+        <div className="mb-4 flex justify-center">
+          <img
+            src="/src/imports/image.png"
+            alt="VS Soap"
+            className="h-16 w-auto object-contain opacity-70"
+          />
+        </div>
+        <p className="text-stone-500">© 2026 VS Soap. Створено з любов'ю в Україні 🇺🇦</p>
       </footer>
     </section>
   );

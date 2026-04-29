@@ -1,3 +1,5 @@
+import { DecorativeFlower, DecorativeLeaf } from './DecorativeElements';
+
 export function WhyNatural() {
   const benefits = [
     {
@@ -19,8 +21,14 @@ export function WhyNatural() {
   ];
 
   return (
-    <section className="py-20 px-6 bg-white" id="why">
-      <div className="max-w-6xl mx-auto">
+    <section className="relative py-20 px-6 bg-white overflow-hidden" id="why">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 pointer-events-none opacity-20">
+        <DecorativeFlower className="absolute top-10 right-20 w-16 h-16" />
+        <DecorativeLeaf className="absolute bottom-10 left-10 w-20 h-20" />
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto">
         <h2 className="text-4xl md:text-5xl text-center mb-4 text-stone-800">
           Чому натуральна косметика?
         </h2>
