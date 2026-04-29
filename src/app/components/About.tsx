@@ -1,12 +1,17 @@
-import { DecorativeCircles, DecorativeWave } from './DecorativeElements';
+import { DecorativeCircles, DecorativeWave, BotanicalOlive, BotanicalHerb } from './DecorativeElements';
 
 export function About() {
   return (
-    <section className="relative py-20 px-6 bg-stone-50 overflow-hidden" id="about">
+    <section className="relative py-20 px-6 bg-stone-100 overflow-hidden" id="about">
       {/* Decorative elements */}
       <div className="absolute inset-0 pointer-events-none opacity-15">
         <DecorativeCircles className="absolute top-20 right-10 w-24 h-24" />
         <DecorativeWave className="absolute bottom-20 left-0 w-48 h-24" />
+      </div>
+      {/* Botanical illustrations */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.11]">
+        <BotanicalOlive className="absolute -top-6 -right-4 w-40 h-auto text-stone-700 -rotate-6" />
+        <BotanicalHerb className="absolute -bottom-4 left-8 w-32 h-auto text-stone-700 rotate-3" />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto">

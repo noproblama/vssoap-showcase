@@ -1,3 +1,4 @@
+import type { ComponentType } from 'react';
 import { SoapPlaceholder } from './SoapPlaceholder';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
@@ -13,9 +14,10 @@ interface Product {
 interface ProductCardProps {
   product: Product;
   onClick?: () => void;
+  Botanical?: ComponentType<{ className?: string }>;
 }
 
-export function ProductCard({ product, onClick }: ProductCardProps) {
+export function ProductCard({ product, onClick, Botanical }: ProductCardProps) {
   const isPremium = product.category === 'premium';
 
   return (
@@ -43,7 +45,12 @@ export function ProductCard({ product, onClick }: ProductCardProps) {
         )}
       </div>
 
-      <div className="p-6">
+      <div className="p-6 relative">
+        {Botanical && (
+          <div className="absolute -bottom-5 -right-3 pointer-events-none opacity-[0.13]">
+            <Botanical className="w-28 h-auto text-stone-600" />
+          </div>
+        )}
         <div className="flex justify-between items-start mb-3">
           <h3 className="text-2xl text-stone-800">
             {product.name}

@@ -1,7 +1,26 @@
+import type { ComponentType } from 'react';
+import { useState } from 'react';
 import { ProductCard } from './ProductCard';
 import { ProductModal } from './ProductModal';
-import { DecorativeFlower, DecorativeLeaf, DecorativeWave } from './DecorativeElements';
-import { useState } from 'react';
+import {
+  DecorativeFlower, DecorativeLeaf, DecorativeWave,
+  BotanicalOlive, BotanicalLavender, BotanicalChamomile,
+  BotanicalRose, BotanicalHerb, BotanicalHoneycomb, BotanicalStrawberry,
+} from './DecorativeElements';
+
+const productBotanicals: Record<number, ComponentType<{ className?: string }>> = {
+  1:  BotanicalChamomile,   // Дитяче — chamomile, gentle
+  2:  BotanicalOlive,       // Алеппське — olive oil 80%
+  3:  BotanicalRose,        // Екзотичне — exotic floral
+  4:  BotanicalLavender,    // Лавандове — lavender
+  5:  BotanicalHoneycomb,   // Медове — honey & propolis
+  6:  BotanicalHerb,        // Полин-шавлія-пижмо — herb
+  7:  BotanicalHerb,        // Сольове — mint & eucalyptus in it
+  8:  BotanicalRose,        // Трояндове — rose
+  9:  BotanicalChamomile,   // Квіткове — chamomile & calendula
+  10: BotanicalStrawberry,  // Полуничне — strawberry
+  11: BotanicalOlive,       // Набори — classic
+};
 
 const products = [
   {
@@ -11,7 +30,9 @@ const products = [
     price: "180 грн",
     description: "Найніжніше мило для малюків. Гіпоалергенне, з натуральними маслами.",
     detailedDescription: "Спеціально розроблене для ніжної дитячої шкіри. Не містить жодних агресивних компонентів, барвників чи синтетичних ароматів. Ідеально підходить для щоденного купання немовлят та дітей віком до 3 років. М'яко очищає, не пересушує шкіру.",
-    image: "https://images.unsplash.com/photo-1606448009227-af1758630e60?w=800",
+    image: "/src/imports/soap-children-1.jpg",
+    additionalImages: ["/src/imports/soap-children-2.jpg"],
+    videoUrl: "/src/imports/soap-children.mp4",
     ingredients: [
       "Оливкова олія холодного віджиму",
       "Кокосова олія",
@@ -35,8 +56,8 @@ const products = [
     price: "220 грн",
     description: "Традиційне сирійське мило з лавровим та оливковим маслами.",
     detailedDescription: "Виготовлене за старовинним сирійським рецептом, що налічує понад 2000 років історії. Мило вислужується мінімум 9 місяців, що робить його особливо м'яким та ефективним. Чим довше зберігається - тім краще стає. Ідеально для чутливої та проблемної шкіри.",
-    image: "/src/imports/soap-aleppo-1.jpg",
-    additionalImages: ["/src/imports/soap-aleppo-2.jpg", "/src/imports/soap-aleppo-3.jpg"],
+    image: "/src/imports/soap-aleppo-2.jpg",
+    additionalImages: ["/src/imports/soap-aleppo-3.jpg"],
     videoUrl: "/src/imports/soap-aleppo.mp4",
     ingredients: [
       "Оливкова олія Extra Virgin (80%)",
@@ -59,8 +80,8 @@ const products = [
     price: "150 грн",
     description: "З екзотичними оліями та ароматами. Живить та зволожує шкіру.",
     detailedDescription: "Розкішна композиція екзотичних олій, що транспортує вас до тропічного раю. Глибоко живить шкіру, залишаючи її оксамитово-м'якою. Ідеально для сухої та нормальної шкіри.",
-    image: "/src/imports/soap-exotic-1.jpg",
-    additionalImages: ["/src/imports/soap-exotic-2.jpg", "/src/imports/soap-exotic-3.jpg"],
+    image: "/src/imports/soap-exotic-2.jpg",
+    additionalImages: ["/src/imports/soap-exotic-3.jpg"],
     videoUrl: "/src/imports/soap-exotic.mp4",
     ingredients: [
       "Кокосова олія",
@@ -84,8 +105,8 @@ const products = [
     price: "145 грн",
     description: "Заспокоює та розслабляє. З натуральною олією лаванди.",
     detailedDescription: "Мило з цілющими властивостями лаванди, яка вирощена в екологічно чистих районах. Ідеально підходить для вечірнього душу - заспокоює нервову систему та готує до здорового сну. Природний антисептик.",
-    image: "/src/imports/soap-lavender-1.jpg",
-    additionalImages: ["/src/imports/soap-lavender-2.jpg", "/src/imports/soap-lavender-3.jpg"],
+    image: "/src/imports/soap-lavender-2.jpg",
+    additionalImages: ["/src/imports/soap-lavender-3.jpg"],
     videoUrl: "/src/imports/soap-lavender.mp4",
     ingredients: [
       "Оливкова олія",
@@ -110,8 +131,8 @@ const products = [
     price: "155 грн",
     description: "З натуральним медом та прополісом. Живить та відновлює шкіру.",
     detailedDescription: "Збагачене натуральним медом та прополісом від українських бджолярів. Мед — природний антиоксидант, що живить та відновлює шкіру. Прополіс має антибактеріальні властивості. Ідеально для осіннього та зимового періоду.",
-    image: "/src/imports/soap-honey-1.jpg",
-    additionalImages: ["/src/imports/soap-honey-2.jpg", "/src/imports/soap-honey-3.jpg"],
+    image: "/src/imports/soap-honey-2.jpg",
+    additionalImages: ["/src/imports/soap-honey-3.jpg"],
     videoUrl: "/src/imports/soap-honey.mp4",
     ingredients: [
       "Натуральний мед",
@@ -136,7 +157,9 @@ const products = [
     price: "140 грн",
     description: "Трав'яний букет для глибокого очищення.",
     detailedDescription: "Потужна трав'яна композиція з українських луків. Ці рослини відомі своїми очищувальними та антисептичними властивостями. Ідеально підходить для проблемної та жирної шкіри. Особливо рекомендується влітку.",
-    image: "https://images.unsplash.com/photo-1546552768-9e3a94b38a59?w=800",
+    image: "/src/imports/soap-wormwood-sage-tansy-1.jpg",
+    additionalImages: ["/src/imports/soap-wormwood-sage-tansy-3.jpg"],
+    videoUrl: "/src/imports/soap-wormwood-sage-tansy.mp4",
     ingredients: [
       "Відвар полину",
       "Відвар шавлії",
@@ -160,7 +183,8 @@ const products = [
     price: "135 грн",
     description: "З морською сіллю та мінералами. Пілінг та детокс.",
     detailedDescription: "Збагачене морською сіллю з Мертвого моря. Чудовий природний скраб, що м'яко відлущує мертві клітини шкіри. Мінерали в складі солі живлять та тонізують шкіру. Детокс-ефект для всього тіла.",
-    image: "https://images.unsplash.com/photo-1606447965993-60155023d1ae?w=800",
+    image: "/src/imports/soap-salty-1.jpg",
+    additionalImages: ["/src/imports/soap-salty-2.jpg"],
     ingredients: [
       "Морська сіль (Мертве море)",
       "Гімалайська рожева сіль",
@@ -184,7 +208,9 @@ const products = [
     price: "165 грн",
     description: "Ніжний аромат троянди. Зволожує та тонізує.",
     detailedDescription: "Створене з екстрактом троянди та пелюстками троянди. Розкішний квітковий аромат дарує відчуття SPA-процедури вдома. Підходить для всіх типів шкіри, особливо для сухої та зрілої.",
-    image: "https://images.unsplash.com/photo-1606448009227-af1758630e60?w=800",
+    image: "/src/imports/soap-rose-1.jpg",
+    additionalImages: ["/src/imports/soap-rose-3.jpg"],
+    videoUrl: "/src/imports/soap-rose.mp4",
     ingredients: [
       "Трояндова вода",
       "Пелюстки троянди",
@@ -209,7 +235,7 @@ const products = [
     description: "Букет квіткових екстрактів. Делікатний догляд.",
     detailedDescription: "Ніжна композиція з екстрактів польових та садових квітів. М'який догляд для чутливої шкіри. Делікатний квітковий аромат супроводжує вас протягом дня. Підходить для щоденного використання.",
     image: "/src/imports/soap-floral-1.jpg",
-    additionalImages: ["/src/imports/soap-floral-2.jpg", "/src/imports/soap-floral-3.jpg"],
+    additionalImages: ["/src/imports/soap-floral-3.jpg"],
     videoUrl: "/src/imports/soap-floral.mp4",
     ingredients: [
       "Екстракт ромашки",
@@ -234,7 +260,9 @@ const products = [
     price: "150 грн",
     description: "Солодкий аромат полуниці та цілющі властивості подорожника.",
     detailedDescription: "Унікальна комбінація насіння полуниці та екстракту подорожника. Полуничні зернятка створюють м'який пілінг-ефект, а подорожник відомий своїми ранозагоювальними властивостями. Ідеально для літнього сезону.",
-    image: "https://images.unsplash.com/photo-1606447965993-60155023d1ae?w=800",
+    image: "/src/imports/soap-strawberry-1.jpg",
+    additionalImages: ["/src/imports/soap-strawberry-2.jpg"],
+    videoUrl: "/src/imports/soap-strawberry.mp4",
     ingredients: [
       "Насіння полуниці",
       "Екстракт подорожника",
@@ -294,14 +322,17 @@ export function ProductGrid() {
   };
 
   return (
-    <section className="relative py-20 px-6 bg-white overflow-hidden" id="products">
+    <section className="relative py-20 px-6 bg-stone-50 overflow-hidden" id="products">
       {/* Decorative elements */}
-      <div className="absolute inset-0 pointer-events-none opacity-20">
+      <div className="absolute inset-0 pointer-events-none opacity-15">
         <DecorativeFlower className="absolute top-10 left-10 w-16 h-16" />
-        <DecorativeLeaf className="absolute top-40 right-20 w-20 h-20" />
         <DecorativeWave className="absolute top-1/2 left-0 w-64 h-32" />
-        <DecorativeFlower className="absolute bottom-40 right-10 w-20 h-20" />
-        <DecorativeLeaf className="absolute bottom-20 left-1/4 w-16 h-16" />
+        <DecorativeLeaf className="absolute bottom-20 right-20 w-16 h-16" />
+      </div>
+      {/* Botanical illustrations */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.08]">
+        <BotanicalChamomile className="absolute -bottom-12 -left-8 w-56 h-auto text-stone-700" />
+        <BotanicalRose className="absolute -top-8 -right-4 w-48 h-auto text-stone-700 rotate-6" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
@@ -318,6 +349,7 @@ export function ProductGrid() {
               key={product.id}
               product={product}
               onClick={() => handleOpenModal(index)}
+              Botanical={productBotanicals[product.id]}
             />
           ))}
         </div>

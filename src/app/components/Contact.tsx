@@ -1,4 +1,4 @@
-import { DecorativeFlower, DecorativeWave } from './DecorativeElements';
+import { DecorativeFlower, DecorativeWave, BotanicalRose, BotanicalLavender, BotanicalOlive } from './DecorativeElements';
 
 export function Contact() {
   return (
@@ -7,6 +7,11 @@ export function Contact() {
       <div className="absolute inset-0 pointer-events-none opacity-30">
         <DecorativeWave className="absolute top-20 right-10 w-32 h-16" />
         <DecorativeFlower className="absolute bottom-40 left-10 w-24 h-24" />
+      </div>
+      {/* Botanical illustrations */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.12]">
+        <BotanicalRose className="absolute -top-4 left-8 w-36 h-auto text-stone-700 -rotate-6" />
+        <BotanicalOlive className="absolute -bottom-4 right-8 w-28 h-auto text-stone-700 rotate-6" />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
