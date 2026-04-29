@@ -1,4 +1,8 @@
-import { BotanicalOlive, BotanicalLavender, BotanicalChamomile } from './DecorativeElements';
+import {
+  BotanicalOlive,
+  BotanicalLavender,
+  BotanicalChamomile,
+} from "./DecorativeElements";
 
 export function Hero() {
   return (
@@ -12,7 +16,7 @@ export function Hero() {
           playsInline
           className="w-full h-full object-cover opacity-60"
         >
-          <source src="/src/imports/soap-presentation.mp4" type="video/mp4" />
+          <source src="/public/soap-presentation.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-stone-50/60 via-stone-50/40 to-stone-50/65"></div>
       </div>
@@ -26,7 +30,7 @@ export function Hero() {
       <div className="relative z-10 max-w-4xl mx-auto text-center">
         <div className="mb-8 flex justify-center">
           <img
-            src="/src/imports/image.png"
+            src="/public/image.png"
             alt="VS Soap Logo"
             className="h-24 md:h-32 w-auto object-contain drop-shadow-sm"
           />
@@ -38,7 +42,8 @@ export function Hero() {
           Крафтове мило ручної роботи
         </p>
         <p className="text-lg text-stone-500 max-w-2xl mx-auto">
-          Створене з любов'ю та турботою про вашу шкіру. Тільки натуральні інгредієнти, без хімії та консервантів.
+          Створене з любов'ю та турботою про вашу шкіру. Тільки натуральні
+          інгредієнти, без хімії та консервантів.
         </p>
       </div>
     </section>

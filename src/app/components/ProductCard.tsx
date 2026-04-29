@@ -1,6 +1,6 @@
-import type { ComponentType } from 'react';
-import { SoapPlaceholder } from './SoapPlaceholder';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import type { ComponentType } from "react";
+import { SoapPlaceholder } from "./SoapPlaceholder";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 interface Product {
   id: number;
@@ -18,7 +18,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, onClick, Botanical }: ProductCardProps) {
-  const isPremium = product.category === 'premium';
+  const isPremium = product.category === "premium";
 
   return (
     <div
@@ -26,7 +26,7 @@ export function ProductCard({ product, onClick, Botanical }: ProductCardProps) {
       onClick={onClick}
     >
       <div className="relative aspect-square overflow-hidden bg-stone-100">
-        {product.image.startsWith('/src/imports/') ? (
+        {product.image.startsWith("/public/") ? (
           <ImageWithFallback
             src={product.image}
             alt={product.name}
@@ -52,16 +52,10 @@ export function ProductCard({ product, onClick, Botanical }: ProductCardProps) {
           </div>
         )}
         <div className="flex justify-between items-start mb-3">
-          <h3 className="text-2xl text-stone-800">
-            {product.name}
-          </h3>
-          <span className="text-xl text-sage-700">
-            {product.price}
-          </span>
+          <h3 className="text-2xl text-stone-800">{product.name}</h3>
+          <span className="text-xl text-sage-700">{product.price}</span>
         </div>
-        <p className="text-stone-600 leading-relaxed">
-          {product.description}
-        </p>
+        <p className="text-stone-600 leading-relaxed">{product.description}</p>
       </div>
     </div>
   );

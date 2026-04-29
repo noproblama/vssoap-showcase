@@ -1,8 +1,17 @@
-import { DecorativeFlower, DecorativeWave, BotanicalRose, BotanicalLavender, BotanicalOlive } from './DecorativeElements';
+import {
+  DecorativeFlower,
+  DecorativeWave,
+  BotanicalRose,
+  BotanicalLavender,
+  BotanicalOlive,
+} from "./DecorativeElements";
 
 export function Contact() {
   return (
-    <section className="relative py-20 px-6 bg-gradient-to-b from-stone-50 to-sage-50 overflow-hidden" id="contact">
+    <section
+      className="relative py-20 px-6 bg-gradient-to-b from-stone-50 to-sage-50 overflow-hidden"
+      id="contact"
+    >
       {/* Decorative elements */}
       <div className="absolute inset-0 pointer-events-none opacity-30">
         <DecorativeWave className="absolute top-20 right-10 w-32 h-16" />
@@ -21,7 +30,8 @@ export function Contact() {
 
         <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm mb-12">
           <p className="text-lg text-stone-700 mb-8 leading-relaxed">
-            Замовлення приймаю через соціальні мережі або за телефоном. Доставка по всій Україні Новою Поштою або Укрпоштою.
+            Замовлення приймаю через соціальні мережі або за телефоном. Доставка
+            по всій Україні Новою Поштою або Укрпоштою.
           </p>
 
           <div className="space-y-4">
@@ -60,19 +70,22 @@ export function Contact() {
         </div>
 
         <p className="text-stone-600">
-          Мінімальне замовлення — 2 бруски. При замовленні від 5 брусків — знижка 10%
+          Мінімальне замовлення — 2 бруски. При замовленні від 5 брусків —
+          знижка 10%
         </p>
       </div>
 
       <footer className="mt-16 text-center">
         <div className="mb-4 flex justify-center">
           <img
-            src="/src/imports/image.png"
+            src="/public/image.png"
             alt="VS Soap"
             className="h-16 w-auto object-contain opacity-70"
           />
         </div>
-        <p className="text-stone-500">© 2026 VS Soap. Створено з любов'ю в Україні 🇺🇦</p>
+        <p className="text-stone-500">
+          © 2026 VS Soap. Створено з любов'ю в Україні 🇺🇦
+        </p>
       </footer>
     </section>
   );
