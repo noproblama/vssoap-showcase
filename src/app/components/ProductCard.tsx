@@ -1,4 +1,3 @@
-import type { ComponentType } from "react";
 import { SoapPlaceholder } from "./SoapPlaceholder";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
@@ -14,19 +13,18 @@ interface Product {
 interface ProductCardProps {
   product: Product;
   onClick?: () => void;
-  Botanical?: ComponentType<{ className?: string }>;
 }
 
-export function ProductCard({ product, onClick, Botanical }: ProductCardProps) {
+export function ProductCard({ product, onClick }: ProductCardProps) {
   const isPremium = product.category === "premium";
 
   return (
     <div
-      className="group relative bg-stone-50 rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+      className="group relative rounded-xl overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer bg-sage-200 opacity-80"
       onClick={onClick}
     >
       <div className="relative aspect-square overflow-hidden bg-stone-100">
-        {product.image.startsWith("/public/") ? (
+        {product.image.startsWith("/") ? (
           <ImageWithFallback
             src={product.image}
             alt={product.name}
@@ -45,17 +43,16 @@ export function ProductCard({ product, onClick, Botanical }: ProductCardProps) {
         )}
       </div>
 
-      <div className="p-6 relative">
-        {Botanical && (
-          <div className="absolute -bottom-5 -right-3 pointer-events-none opacity-[0.13]">
-            <Botanical className="w-28 h-auto text-stone-600" />
-          </div>
-        )}
-        <div className="flex justify-between items-start mb-3">
-          <h3 className="text-2xl text-stone-800">{product.name}</h3>
-          <span className="text-xl text-sage-700">{product.price}</span>
+      <div className="p-5">
+        <div className="flex justify-between items-start mb-2">
+          <h3 className="text-xl text-stone-800">{product.name}</h3>
+          <span className="text-lg text-sage-700 shrink-0 ml-2">
+            {product.price}
+          </span>
         </div>
-        <p className="text-stone-600 leading-relaxed">{product.description}</p>
+        <p className="text-stone-600 text-sm leading-relaxed">
+          {product.description}
+        </p>
       </div>
     </div>
   );

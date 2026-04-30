@@ -1,26 +1,15 @@
-import {
-  DecorativeFlower,
-  DecorativeWave,
-  BotanicalRose,
-  BotanicalLavender,
-  BotanicalOlive,
-} from "./DecorativeElements";
+import { SoapWaveBg2 } from "./DecorativeElements";
+import { Instagram, Send, Phone, Mail } from "lucide-react";
+import { asset } from "../lib/asset";
 
 export function Contact() {
   return (
     <section
-      className="relative py-20 px-6 bg-gradient-to-b from-stone-50 to-sage-50 overflow-hidden"
+      className="relative pt-20 pb-5 px-6 bg-stone-100 overflow-hidden"
       id="contact"
     >
-      {/* Decorative elements */}
-      <div className="absolute inset-0 pointer-events-none opacity-30">
-        <DecorativeWave className="absolute top-20 right-10 w-32 h-16" />
-        <DecorativeFlower className="absolute bottom-40 left-10 w-24 h-24" />
-      </div>
-      {/* Botanical illustrations */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.12]">
-        <BotanicalRose className="absolute -top-4 left-8 w-36 h-auto text-stone-700 -rotate-6" />
-        <BotanicalOlive className="absolute -bottom-4 right-8 w-28 h-auto text-stone-700 rotate-6" />
+      <div className="absolute inset-0 pointer-events-none opacity-[0.3] text-stone-600">
+        <SoapWaveBg2 />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
@@ -28,43 +17,64 @@ export function Contact() {
           Як замовити
         </h2>
 
-        <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm mb-12">
-          <p className="text-lg text-stone-700 mb-8 leading-relaxed">
-            Замовлення приймаю через соціальні мережі або за телефоном. Доставка
-            по всій Україні Новою Поштою або Укрпоштою.
+        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm mb-12 border border-stone-100 opacity-85">
+          <p className="text-lg text-stone-600 mb-10 leading-relaxed text-center max-w-2xl mx-auto">
+            Замовлення приймаю через соціальні мережі або за телефоном.{" "}
+            <br className="hidden md:block" />
+            Доставка по всій Україні Новою Поштою або Укрпоштою.
           </p>
 
-          <div className="space-y-4">
+          <div className="flex flex-col md:flex-row flex-wrap justify-center gap-4">
             <a
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="block bg-sage-600 text-white py-4 px-8 rounded-lg hover:bg-sage-700 transition-all text-lg shadow-sm"
+              className="flex items-center justify-center gap-3 w-full md:w-auto bg-stone-50 text-stone-700 py-4 px-8 rounded-full hover:bg-sage-600 hover:text-white transition-all duration-300 border border-stone-200 shadow-sm hover:shadow-md group"
             >
-              📸 Instagram
+              <Instagram
+                size={22}
+                className="group-hover:scale-110 transition-transform"
+              />
+              <span className="font-medium text-lg md:text-base">
+                Instagram
+              </span>
             </a>
 
             <a
               href="https://t.me"
               target="_blank"
               rel="noopener noreferrer"
-              className="block bg-sage-600 text-white py-4 px-8 rounded-lg hover:bg-sage-700 transition-all text-lg shadow-sm"
+              className="flex items-center justify-center gap-3 w-full md:w-auto bg-stone-50 text-stone-700 py-4 px-8 rounded-full hover:bg-sage-600 hover:text-white transition-all duration-300 border border-stone-200 shadow-sm hover:shadow-md group"
             >
-              ✈️ Telegram
+              <Send
+                size={22}
+                className="group-hover:scale-110 transition-transform"
+              />
+              <span className="font-medium text-lg md:text-base">Telegram</span>
             </a>
 
             <a
               href="tel:+380000000000"
-              className="block bg-sage-600 text-white py-4 px-8 rounded-lg hover:bg-sage-700 transition-all text-lg shadow-sm"
+              className="flex items-center justify-center gap-3 w-full md:w-auto bg-stone-50 text-stone-700 py-4 px-8 rounded-full hover:bg-sage-600 hover:text-white transition-all duration-300 border border-stone-200 shadow-sm hover:shadow-md group"
             >
-              📞 +380 (00) 000-00-00
+              <Phone
+                size={22}
+                className="group-hover:scale-110 transition-transform"
+              />
+              <span className="font-medium text-lg md:text-base">
+                (000) 000-00-00
+              </span>
             </a>
 
             <a
               href="mailto:soap@example.com"
-              className="block bg-sage-600 text-white py-4 px-8 rounded-lg hover:bg-sage-700 transition-all text-lg shadow-sm"
+              className="flex items-center justify-center gap-3 w-full md:w-auto bg-stone-50 text-stone-700 py-4 px-8 rounded-full hover:bg-sage-600 hover:text-white transition-all duration-300 border border-stone-200 shadow-sm hover:shadow-md group"
             >
-              ✉️ soap@example.com
+              <Mail
+                size={22}
+                className="group-hover:scale-110 transition-transform"
+              />
+              <span className="font-medium text-lg md:text-base">Email</span>
             </a>
           </div>
         </div>
@@ -76,13 +86,6 @@ export function Contact() {
       </div>
 
       <footer className="mt-16 text-center">
-        <div className="mb-4 flex justify-center">
-          <img
-            src="/public/image.png"
-            alt="VS Soap"
-            className="h-16 w-auto object-contain opacity-70"
-          />
-        </div>
         <p className="text-stone-500">
           © 2026 VS Soap. Створено з любов'ю в Україні 🇺🇦
         </p>
