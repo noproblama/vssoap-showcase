@@ -112,7 +112,7 @@ export function Hero() {
         <div className="relative z-10 max-w-3xl mx-auto text-center">
           {/* Pill badge */}
           <div className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full bg-white/55 backdrop-blur-sm border border-stone-200/70 text-stone-600 text-sm">
-            100% натуральне · Холодне омилення · Зроблено в Україні
+            Натуральні олії, трави та квіти Черкащини · лише природні барвники · 100% ефірні олії
           </div>
 
           {/* Main heading — italic Cormorant Garamond for romance */}

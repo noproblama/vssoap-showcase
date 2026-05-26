@@ -47,7 +47,7 @@ export function WhyNatural() {
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl p-8 hover:shadow-lg transition-shadow flex gap-5 items-start opacity-85"
+              className="bg-white/85 rounded-xl p-8 hover:shadow-lg transition-shadow flex gap-5 items-start"
             >
               <div className="shrink-0 w-14 h-14 rounded-full bg-white shadow-sm flex items-center justify-center">
                 <benefit.Icon

@@ -20,7 +20,7 @@ export function ProductCard({ product, onClick }: ProductCardProps) {
 
   return (
     <div
-      className="group relative rounded-xl overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer bg-sage-200 opacity-80"
+      className="group relative rounded-xl overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer bg-sage-200"
       onClick={onClick}
     >
       <div className="relative aspect-square overflow-hidden bg-stone-100">

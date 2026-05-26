@@ -93,12 +93,12 @@ export function ProductModal({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent
-        className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
+        className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-0 md:p-4"
         onClick={onClose}
       >
-        {/* Modal box — full width on mobile, capped on desktop */}
+        {/* Modal box — full screen on mobile, capped on desktop */}
         <div
-          className="relative w-full max-w-lg max-h-[92dvh] flex flex-col bg-white rounded-2xl shadow-2xl overflow-hidden"
+          className="relative w-full h-dvh md:h-auto md:max-w-7/12 md:max-h-[92dvh] flex flex-col bg-white rounded-none md:rounded-2xl shadow-2xl overflow-hidden"
           onClick={(e) => e.stopPropagation()}
         >
           <DialogTitle className="sr-only">{product.name}</DialogTitle>

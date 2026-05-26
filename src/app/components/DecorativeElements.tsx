@@ -1,4 +1,4 @@
-import { useId } from "react";
+import { useId, useRef, useState, useEffect } from "react";
 
 /* ─── Repeating Nordic botanical tile background ──────────────────────────── */
 export function BotanicalPatternBg({ className = "" }: { className?: string }) {
@@ -2129,65 +2129,80 @@ export function BotanicalHerb({ className = "" }: { className?: string }) {
 }
 
 export function SoapWaveBg() {
+  const ref = useRef<SVGSVGElement>(null);
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const update = () => {
+      const section = ref.current?.closest("section");
+      if (!section) return;
+      const { top, height } = section.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const raw = (vh / 2 - (top + height / 2)) * 0.06;
+      setOffset(Math.max(-36, Math.min(36, raw)));
+    };
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+    return () => window.removeEventListener("scroll", update);
+  }, []);
+
   return (
     <svg
+      ref={ref}
       viewBox="0 0 1440 400"
       preserveAspectRatio="none"
       className="w-full h-full"
+      style={{ transform: `translateY(${offset}px)` }}
       xmlns="http://w3.org"
     >
-      {/* 1. Base Creamy Color */}
-      {/*<rect width="100%" height="100%" fill="#F9F6F1"></rect>*/}
-
-      {/* 2. ROSE LAYER - The "Outer" Swirl */}
       <path
-        d="M0 140
-               C 40 200, 400 450, 600 300
-               C 900 120, 1300 400, 1440 150
-               L 1440 400 L 0 400 Z"
+        d="M0 140 C 40 200, 400 450, 600 300 C 900 120, 1300 400, 1440 150 L 1440 400 L 0 400 Z"
         fill="#D6A699"
-      ></path>
-
-      {/* 3. OLIVE LAYER - The "Inner" Swirl (Slightly lower & offset) */}
+      />
       <path
-        d="M0 120
-               C 100 230, 450 480, 750 330
-               C 1050 190, 1350 430, 1440 280
-               L 1440 400 L 0 400 Z"
+        d="M0 120 C 100 230, 450 480, 750 330 C 1050 190, 1350 430, 1440 280 L 1440 400 L 0 400 Z"
         fill="#A4AC86"
-      ></path>
+      />
     </svg>
   );
 }
 
 export function SoapWaveBg2() {
+  const ref = useRef<SVGSVGElement>(null);
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const update = () => {
+      const section = ref.current?.closest("section");
+      if (!section) return;
+      const { top, height } = section.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const raw = (vh / 2 - (top + height / 2)) * 0.06;
+      setOffset(Math.max(-36, Math.min(36, raw)));
+    };
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+    return () => window.removeEventListener("scroll", update);
+  }, []);
+
   return (
     <svg
+      ref={ref}
       viewBox="0 0 1440 400"
       preserveAspectRatio="none"
       className="w-full h-full"
+      style={{ transform: `translateY(${offset}px)` }}
       xmlns="http://w3.org"
     >
-      {/* 1. Base Creamy Color */}
-      <rect width="100%" height="100%" fill="#D6A699"></rect>
-
-      {/* 2. ROSE LAYER - The "Outer" Swirl */}
+      <rect width="100%" height="100%" fill="#D6A699" />
       <path
-        d="M0 140
-               C 40 200, 400 450, 600 300
-               C 900 120, 1300 400, 1440 150
-               L 1440 400 L 0 400 Z"
+        d="M0 140 C 40 200, 400 450, 600 300 C 900 120, 1300 400, 1440 150 L 1440 400 L 0 400 Z"
         fill="#A4AC86"
-      ></path>
-
-      {/* 3. OLIVE LAYER - The "Inner" Swirl (Slightly lower & offset) */}
+      />
       <path
-        d="M0 320
-               C 100 330, 450 480, 750 400
-               C 1050 290, 1350 530, 1440 280
-               L 1440 400 L 0 400 Z"
+        d="M0 320 C 100 330, 450 480, 750 400 C 1050 290, 1350 530, 1440 280 L 1440 400 L 0 400 Z"
         fill="#F9F6F1"
-      ></path>
+      />
     </svg>
   );
 }
