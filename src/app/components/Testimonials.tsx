@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Play, X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
+import { FadeIn } from "./FadeIn";
 
 function QuoteMark() {
   return (
@@ -384,27 +385,30 @@ export function Testimonials() {
       </div>
 
       {/* Header — stays centered */}
-      <div className="relative z-10 max-w-6xl mx-auto text-center mb-14">
+      <FadeIn className="relative z-10 max-w-6xl mx-auto text-center mb-14">
         <h2 className="text-4xl md:text-5xl mb-4 text-stone-800">
           Що кажуть покупці
         </h2>
         <p className="text-stone-500 text-lg max-w-2xl mx-auto">
           Реальні враження від справжніх людей
         </p>
-      </div>
+      </FadeIn>
 
       {/* Review cards — full width, 1 on mobile, 2 on tablet, 4 on desktop */}
       <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {testimonials.map((t) => (
-          <TestimonialCard
-            key={t.name}
-            testimonial={t}
-            onPlay={() =>
-              setActiveVideo({ url: t.videoUrl, name: t.name, text: t.text })
-            }
-          />
+        {testimonials.map((t, i) => (
+          <FadeIn key={t.name} delay={i * 100}>
+            <TestimonialCard
+              testimonial={t}
+              onPlay={() =>
+                setActiveVideo({ url: t.videoUrl, name: t.name, text: t.text })
+              }
+            />
+          </FadeIn>
         ))}
-        <SocialReviewCard onOpen={(i) => setActiveSocial(i)} />
+        <FadeIn delay={testimonials.length * 100}>
+          <SocialReviewCard onOpen={(i) => setActiveSocial(i)} />
+        </FadeIn>
       </div>
 
       <p className="relative z-10 text-center text-stone-400 text-sm mt-8">

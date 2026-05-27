@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import { BotanicalPatternBg, SoapWaveBg } from "./DecorativeElements";
+import { FadeIn } from "./FadeIn";
 import { asset } from "../lib/asset";
 
 // ── Increment to include a new creator_N.webp in public/
@@ -169,13 +170,16 @@ export function About() {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto">
-        <h2 className="text-4xl md:text-5xl text-center mb-4 text-stone-800">
-          Про майстерню
-        </h2>
-        <p className="text-center text-stone-600 mb-12 text-lg">
-          Мистецтво, що зцілює шкіру та турбується про ваше здоров'я
-        </p>
+        <FadeIn>
+          <h2 className="text-4xl md:text-5xl text-center mb-4 text-stone-800">
+            Про майстерню
+          </h2>
+          <p className="text-center text-stone-600 mb-12 text-lg">
+            Мистецтво, що зцілює шкіру та турбується про ваше здоров'я
+          </p>
+        </FadeIn>
 
+        <FadeIn delay={120}>
         <div className="bg-white/90 rounded-2xl p-8 md:p-12 shadow-sm space-y-6">
           <CreatorCarousel />
 
@@ -290,6 +294,7 @@ export function About() {
             </p>
           </AccordionItem>
         </div>
+        </FadeIn>
       </div>
     </section>
   );

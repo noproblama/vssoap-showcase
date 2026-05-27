@@ -1,5 +1,6 @@
 import { Snowflake, ShieldCheck, Sprout, Heart } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { FadeIn } from "./FadeIn";
 
 export function WhyNatural() {
   const benefits: { title: string; description: string; Icon: LucideIcon }[] = [
@@ -35,19 +36,21 @@ export function WhyNatural() {
       id="why"
     >
       <div className="relative z-10 max-w-6xl mx-auto">
-        <h2 className="text-4xl md:text-5xl text-center mb-4 text-stone-800">
-          Чому натуральна косметика?
-        </h2>
-        <p className="text-center text-stone-600 mb-16 text-lg max-w-3xl mx-auto">
-          Наша шкіра — це живий орган, який потребує бережного догляду.
-          Натуральне мило — це не просто засіб гігієни, а турбота про здоров'я.
-        </p>
+        <FadeIn>
+          <h2 className="text-4xl md:text-5xl text-center mb-4 text-stone-800">
+            Чому натуральна косметика?
+          </h2>
+          <p className="text-center text-stone-600 mb-16 text-lg max-w-3xl mx-auto">
+            Наша шкіра — це живий орган, який потребує бережного догляду.
+            Натуральне мило — це не просто засіб гігієни, а турбота про здоров'я.
+          </p>
+        </FadeIn>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {benefits.map((benefit, index) => (
+            <FadeIn key={index} delay={index * 100}>
             <div
-              key={index}
-              className="bg-white/85 rounded-xl p-8 hover:shadow-lg transition-shadow flex gap-5 items-start"
+              className="bg-white/85 rounded-xl p-8 hover:shadow-lg transition-shadow flex gap-5 items-start h-full"
             >
               <div className="shrink-0 w-14 h-14 rounded-full bg-white shadow-sm flex items-center justify-center">
                 <benefit.Icon
@@ -64,6 +67,7 @@ export function WhyNatural() {
                 </p>
               </div>
             </div>
+            </FadeIn>
           ))}
         </div>
       </div>

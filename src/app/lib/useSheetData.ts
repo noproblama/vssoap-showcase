@@ -16,11 +16,20 @@ export interface SheetRow {
 const SHEET_CSV_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vTjpnnUXyuGuunlJkeLHH9oJDxRXlp6tRg9kRmjnnKeN7VPnsWx1iWtfVSI18RyuEhe7UY8K30Cg7nO/pub?gid=0&single=true&output=csv";
 
-export function useSheetData(): Record<number, SheetRow> {
+export function useSheetData(): {
+  data: Record<number, SheetRow>;
+  loading: boolean;
+} {
   const [data, setData] = useState<Record<number, SheetRow>>({});
+  // Start in loading state only when a URL is configured
+  const [loading, setLoading] = useState(!!SHEET_CSV_URL);
 
   useEffect(() => {
     if (!SHEET_CSV_URL) return;
+
+    const done = () => setLoading(false);
+    // Fall back to static defaults after 4 s even if fetch is still pending
+    const timeout = setTimeout(done, 4000);
 
     fetch(SHEET_CSV_URL)
       .then((r) => r.text())
@@ -54,11 +63,16 @@ export function useSheetData(): Record<number, SheetRow> {
         }
 
         setData(result);
+        clearTimeout(timeout);
+        done();
       })
       .catch(() => {
-        // silently fall back to static data
+        clearTimeout(timeout);
+        done();
       });
+
+    return () => clearTimeout(timeout);
   }, []);
 
-  return data;
+  return { data, loading };
 }

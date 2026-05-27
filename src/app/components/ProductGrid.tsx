@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ProductCard } from "./ProductCard";
 import { ProductModal } from "./ProductModal";
+import { FadeIn } from "./FadeIn";
 import { BotanicalPatternBg } from "./DecorativeElements";
 import { products } from "../data/products";
 import { useSheetData } from "../lib/useSheetData";
@@ -10,7 +11,7 @@ export function ProductGrid() {
     number | null
   >(null);
 
-  const sheetData = useSheetData();
+  const { data: sheetData, loading: sheetLoading } = useSheetData();
 
   // Merge static catalogue with live overrides from Google Sheets
   const mergedProducts = products.map((p) => ({
@@ -46,18 +47,22 @@ export function ProductGrid() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        <h2 className="text-4xl md:text-5xl text-center mb-4 text-stone-800">
-          Наші вироби
-        </h2>
-        <p className="text-center text-stone-600 mb-16 text-lg">
-          Кожен шматок створений лише з натуральних інгредієнтів
-        </p>
+        <FadeIn>
+          <h2 className="text-4xl md:text-5xl text-center mb-4 text-stone-800">
+            Наші вироби
+          </h2>
+          <p className="text-center text-stone-600 mb-16 text-lg">
+            Кожен шматок створений лише з натуральних інгредієнтів
+          </p>
+        </FadeIn>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {mergedProducts.map((product, index) => (
             <ProductCard
               key={product.id}
               product={product}
+              index={index}
+              loading={sheetLoading}
               onClick={() => handleOpenModal(index)}
             />
           ))}
@@ -68,6 +73,7 @@ export function ProductGrid() {
         <ProductModal
           product={mergedProducts[selectedProductIndex]}
           isOpen={true}
+          loading={sheetLoading}
           onClose={handleCloseModal}
           onNext={handleNext}
           onPrevious={handlePrevious}

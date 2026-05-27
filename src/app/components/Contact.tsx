@@ -1,4 +1,5 @@
 import { SoapWaveBg2 } from "./DecorativeElements";
+import { FadeIn } from "./FadeIn";
 
 function ViberIcon({ size = 22 }: { size?: number }) {
   return (
@@ -81,10 +82,13 @@ export function Contact() {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <h2 className="text-4xl md:text-5xl mb-8 text-stone-800">
-          Як замовити
-        </h2>
+        <FadeIn>
+          <h2 className="text-4xl md:text-5xl mb-8 text-stone-800">
+            Як замовити
+          </h2>
+        </FadeIn>
 
+        <FadeIn delay={100}>
         <div className="bg-white/85 rounded-3xl p-8 md:p-12 shadow-sm mb-12 border border-stone-100">
           <p className="text-lg text-stone-600 mb-10 leading-relaxed text-center max-w-2xl mx-auto">
             Замовлення приймаю через соціальні мережі або месенджери.{" "}
@@ -142,18 +146,23 @@ export function Contact() {
             </a>
           </div>
         </div>
+        </FadeIn>
 
-        <p className="text-stone-600">
-          Мінімальне замовлення — 2 бруски. При замовленні від 5 брусків —
-          знижка 10%
-        </p>
+        <FadeIn delay={200}>
+          <p className="text-stone-600">
+            Мінімальне замовлення — 2 бруски. При замовленні від 5 брусків —
+            знижка 10%
+          </p>
+        </FadeIn>
       </div>
 
-      <footer className="mt-16 text-center">
-        <p className="text-stone-500">
-          © 2026 VS Soap. Створено з любов'ю в Україні 🇺🇦
-        </p>
-      </footer>
+      <FadeIn delay={300}>
+        <footer className="mt-16 text-center">
+          <p className="text-stone-500">
+            © 2026 VS Soap. Створено з любов'ю в Україні 🇺🇦
+          </p>
+        </footer>
+      </FadeIn>
     </section>
   );
 }

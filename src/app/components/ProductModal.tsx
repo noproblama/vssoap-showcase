@@ -5,6 +5,7 @@ import {
   ChevronRight,
   ChevronDown,
   Play,
+  Sparkles,
 } from "lucide-react";
 import { SoapPlaceholder } from "./SoapPlaceholder";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
@@ -25,6 +26,7 @@ import type { SoapProfile, KeyIngredient, Product } from "../data/products";
 interface ProductModalProps {
   product: Product;
   isOpen: boolean;
+  loading?: boolean;
   onClose: () => void;
   onNext: () => void;
   onPrevious: () => void;
@@ -367,6 +369,7 @@ function QuickMessengers({ productName }: { productName: string }) {
 export function ProductModal({
   product,
   isOpen,
+  loading,
   onClose,
   onNext,
   onPrevious,
@@ -445,9 +448,13 @@ export function ProductModal({
                   {product.name}
                 </h2>
               </div>
-              <span className="shrink-0 text-lg md:text-xl text-sage-700 ml-3">
-                {product.price}
-              </span>
+              {loading ? (
+                <span className="inline-block w-24 h-5 rounded bg-stone-200 animate-pulse shrink-0 ml-3" />
+              ) : (
+                <span className="shrink-0 text-lg md:text-xl text-sage-700 ml-3 animate-fade-in">
+                  {product.price}
+                </span>
+              )}
             </div>
 
             <button
@@ -479,7 +486,8 @@ export function ProductModal({
             <div className="p-4 md:p-6">
               {isPremium && (
                 <div className="mb-3 absolute top-6 right-6 md:top-8 md:right-8">
-                  <span className="bg-sage-700 text-white px-3 py-1 rounded-full text-xs">
+                  <span className="inline-flex items-center gap-1 bg-sage-700 text-white px-3 py-1 rounded-full text-xs">
+                    <Sparkles className="w-2.5 h-2.5" />
                     Premium
                   </span>
                 </div>
@@ -625,18 +633,24 @@ export function ProductModal({
               <div className="mt-5 pt-4 border-t border-stone-200 relative z-10">
                 {/* availability hint */}
                 <div className="flex items-center justify-center gap-1.5 mb-2.5">
-                  <span
-                    className={`w-1.5 h-1.5 rounded-full ${
-                      product.status === "curing"
-                        ? "bg-amber-400"
-                        : product.status === "ready"
-                          ? "bg-sage-600"
-                          : "bg-stone-400"
-                    }`}
-                  />
-                  <span className="text-xs text-stone-500">
-                    {availabilityText}
-                  </span>
+                  {loading ? (
+                    <span className="inline-block w-40 h-3.5 rounded bg-stone-200 animate-pulse" />
+                  ) : (
+                    <span className="flex items-center gap-1.5 animate-fade-in">
+                      <span
+                        className={`w-1.5 h-1.5 rounded-full ${
+                          product.status === "curing"
+                            ? "bg-amber-400"
+                            : product.status === "ready"
+                              ? "bg-sage-600"
+                              : "bg-stone-400"
+                        }`}
+                      />
+                      <span className="text-xs text-stone-500">
+                        {availabilityText}
+                      </span>
+                    </span>
+                  )}
                 </div>
 
                 <a
