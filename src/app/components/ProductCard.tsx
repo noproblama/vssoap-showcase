@@ -1,14 +1,6 @@
+import type { Product } from "../data/products";
 import { SoapPlaceholder } from "./SoapPlaceholder";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  price: string;
-  description: string;
-  image: string;
-}
 
 interface ProductCardProps {
   product: Product;
@@ -17,6 +9,7 @@ interface ProductCardProps {
 
 export function ProductCard({ product, onClick }: ProductCardProps) {
   const isPremium = product.category === "premium";
+  const isCuring = product.status === "curing";
 
   return (
     <div
@@ -36,9 +29,30 @@ export function ProductCard({ product, onClick }: ProductCardProps) {
             className="w-full h-full group-hover:scale-105 transition-transform duration-500"
           />
         )}
+
+        {/* ── Top-right: premium badge ───────────────────────────────── */}
         {isPremium && (
           <div className="absolute top-4 right-4 bg-sage-700 text-white px-3 py-1 rounded-full text-sm z-10">
             Premium
+          </div>
+        )}
+
+        {/* ── Bottom-left: readiness badge ───────────────────────────── */}
+        {product.status && (
+          <div className="absolute bottom-3 left-3 z-10">
+            {isCuring ? (
+              <span className="inline-flex items-center gap-1.5 bg-stone-900/70 backdrop-blur-sm text-white px-2.5 py-1 rounded-full text-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-300 animate-pulse" />
+                {product.cureUntil
+                  ? `Дозріває до ${product.cureUntil}`
+                  : "Дозріває"}
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1.5 bg-white/85 backdrop-blur-sm text-sage-800 px-2.5 py-1 rounded-full text-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-sage-600" />
+                Готове
+              </span>
+            )}
           </div>
         )}
       </div>
