@@ -98,7 +98,7 @@ export function ProductModal({
       >
         {/* Modal box — full screen on mobile, capped on desktop */}
         <div
-          className="relative w-full h-dvh md:h-auto md:max-w-7/12 md:max-h-[92dvh] flex flex-col bg-white rounded-none md:rounded-2xl shadow-2xl overflow-hidden"
+          className="relative w-full h-dvh md:h-auto md:max-w-[700px] md:max-h-[92dvh] flex flex-col bg-white rounded-none md:rounded-2xl shadow-2xl overflow-hidden"
           onClick={(e) => e.stopPropagation()}
         >
           <DialogTitle className="sr-only">{product.name}</DialogTitle>
@@ -142,7 +142,7 @@ export function ProductModal({
           </div>
 
           {/* ── Scrollable content ── */}
-          <div className="overflow-y-auto flex-1 relative">
+          <div className="overflow-y-auto overflow-x-hidden flex-1 relative">
             {/* Botanical watermark */}
             {ModalBotanical && (
               <div className="absolute -bottom-8 -right-6 pointer-events-none opacity-[0.07] text-stone-700">
@@ -159,6 +159,7 @@ export function ProductModal({
                 </div>
               )}
               {/* Main viewer */}
+
               <div className="aspect-video rounded-xl overflow-hidden bg-stone-100 mb-2">
                 {activeMedia.type === "image" ? (
                   activeMedia.src.startsWith("/") ? (
@@ -223,9 +224,32 @@ export function ProductModal({
               {/* Description */}
               <div className="mb-4 relative z-10">
                 <h3 className="text-lg text-stone-800 mb-1.5">Опис</h3>
-                <p className="text-stone-600 leading-relaxed text-sm md:text-base">
-                  {product.detailedDescription || product.description}
-                </p>
+                <div className="space-y-2">
+                  {(product.detailedDescription || product.description)
+                    .split("\n\n")
+                    .map((para, i) => {
+                      const parts = para.split(/\*\*(.*?)\*\*/g);
+                      return (
+                        <p
+                          key={i}
+                          className="text-stone-600 leading-relaxed text-sm md:text-base"
+                        >
+                          {parts.map((part, j) =>
+                            j % 2 === 1 ? (
+                              <strong
+                                key={j}
+                                className="text-stone-800 font-semibold"
+                              >
+                                {part}
+                              </strong>
+                            ) : (
+                              part
+                            ),
+                          )}
+                        </p>
+                      );
+                    })}
+                </div>
               </div>
 
               {/* Ingredients */}
