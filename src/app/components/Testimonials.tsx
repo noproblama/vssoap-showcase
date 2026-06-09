@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Play, X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 import { FadeIn } from "./FadeIn";
 
@@ -217,7 +217,7 @@ function SocialReviewCard({ onOpen }: { onOpen: (index: number) => void }) {
   };
 
   return (
-    <div className="bg-transparent rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col overflow-hidden">
+    <div className="bg-transparent rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col overflow-hidden h-full">
       {/* Image carousel — square to match social screenshot proportions */}
       <div
         className="relative w-full aspect-square overflow-hidden rounded-t-2xl bg-stone-100 cursor-zoom-in group"
@@ -296,16 +296,27 @@ function TestimonialCard({
   onPlay: () => void;
 }) {
   const [expanded, setExpanded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const paragraphs = testimonial.text.split("\n\n");
   const isLong = paragraphs.length > 2;
   const shown = expanded ? paragraphs : paragraphs.slice(0, 2);
 
+  const handleMouseEnter = () => videoRef.current?.play().catch(() => {});
+  const handleMouseLeave = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+
   return (
-    <div className="bg-transparent rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col overflow-hidden">
+    <div className="bg-transparent rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col overflow-hidden h-full">
       {/* Thumbnail + play overlay */}
       <div
         className="relative w-full h-52 overflow-hidden rounded-t-2xl bg-stone-100 cursor-pointer group"
         onClick={onPlay}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         role="button"
         tabIndex={0}
         onKeyDown={(e) => e.key === "Enter" && onPlay()}
@@ -314,17 +325,27 @@ function TestimonialCard({
         <img
           src={testimonial.photo}
           alt={`Відгук від ${testimonial.name}`}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0"
           onError={(e) => {
             (e.target as HTMLImageElement).style.display = "none";
           }}
         />
-        <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/25 transition-colors duration-300">
-          <div className="w-14 h-14 rounded-full bg-white/85 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+        {testimonial.videoUrl && (
+          <video
+            ref={videoRef}
+            src={testimonial.videoUrl}
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          />
+        )}
+        <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/0 transition-colors duration-300">
+          <div className="w-14 h-14 rounded-full bg-white/85 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:opacity-0 transition-opacity duration-300">
             <Play className="w-6 h-6 text-stone-800 ml-1" fill="currentColor" />
           </div>
         </div>
-        <div className="absolute bottom-3 left-3 flex items-center gap-1.5 bg-black/45 backdrop-blur-sm rounded-full px-2.5 py-1">
+        <div className="absolute bottom-3 left-3 flex items-center gap-1.5 bg-black/45 backdrop-blur-sm rounded-full px-2.5 py-1 group-hover:opacity-0 transition-opacity duration-300">
           <Play className="w-3 h-3 text-white" fill="white" />
           <span className="text-white text-xs tracking-wide">Відео</span>
         </div>
@@ -386,6 +407,9 @@ export function Testimonials() {
 
       {/* Header — stays centered */}
       <FadeIn className="relative z-10 max-w-6xl mx-auto text-center mb-14">
+        <span className="block text-[10px] tracking-[0.25em] uppercase text-sage-600 font-semibold mb-3">
+          Відгуки
+        </span>
         <h2 className="text-4xl md:text-5xl mb-4 text-stone-800">
           Що кажуть покупці
         </h2>

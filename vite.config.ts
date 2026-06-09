@@ -23,7 +23,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: "/vssoap-showcase/",
+  base: "/",
   resolve: {
     alias: {
       // Alias @ to the src directory

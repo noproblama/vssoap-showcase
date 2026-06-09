@@ -37,6 +37,9 @@ export function WhyNatural() {
     >
       <div className="relative z-10 max-w-6xl mx-auto">
         <FadeIn>
+          <span className="block text-center text-[10px] tracking-[0.25em] uppercase text-stone-700/60 font-semibold mb-3">
+            Мій підхід
+          </span>
           <h2 className="text-4xl md:text-5xl text-center mb-4 text-stone-800">
             Чому натуральна косметика?
           </h2>
@@ -44,6 +47,50 @@ export function WhyNatural() {
             Наша шкіра — це живий орган, який потребує бережного догляду.
             Натуральне мило — це не просто засіб гігієни, а турбота про здоров'я.
           </p>
+        </FadeIn>
+
+        {/* Manifesto block */}
+        <FadeIn delay={100}>
+          <div className="bg-white/85 rounded-2xl p-8 md:p-10 mb-10">
+            <p className="text-stone-700 text-base md:text-lg leading-relaxed mb-7">
+              У кожен брусочок я закладаю три важливі сенси:
+            </p>
+            <div className="space-y-6 mb-8">
+              {[
+                {
+                  label: "Абсолютна натуральність",
+                  text: "Довіряю тому, що створила Земля — використовую якісні живі олії, глини, лікарські рослини та мацерати, зібрані та зроблені власноруч, 100% ефірні олії, лише природні барвники.",
+                },
+                {
+                  label: "Природна унікальність",
+                  text: "У природі немає двох однакових листків чи квіток — так само кожна партія мого мила має свій неповторний мармуровий візерунок, свій характер і свій відтінок.",
+                },
+                {
+                  label: "Глибока справжність",
+                  text: "Наше життя перенасичене штучними замінниками — від їжі до емоцій. Справжнє мило повертає до тактильної та візуальної правди: воно чесне, адже дихає природою.",
+                },
+              ].map((item, i) => (
+                <div key={i} className="flex gap-4 items-start">
+                  <span className="shrink-0 mt-0.5 w-6 h-6 rounded-full bg-sage-600/15 text-sage-700 text-xs font-semibold flex items-center justify-center">
+                    {i + 1}
+                  </span>
+                  <div>
+                    <span className="block text-stone-800 font-medium mb-1">{item.label}</span>
+                    <p className="text-stone-600 text-sm leading-relaxed">{item.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="text-stone-600 leading-relaxed mb-4 text-sm md:text-base">
+              Створення рецепта схоже на медитацію, де кожна олія, кожен компонент обирається не випадково, а для гармонії всього ансамблю. А далі починається довге очікування — від 6 тижнів до 6 місяців залежно від сорту, поки мило зріє та набирає сили.
+            </p>
+            <p
+              className="text-stone-700 leading-relaxed text-sm md:text-base"
+              style={{ fontFamily: "var(--font-display)", fontStyle: "italic" }}
+            >
+              Це мій маніфест любові та прийняття. Бережно очищаю шкіру — разом з цим змиваю чужі очікування, маски й стрес. Залишається лише я справжня, природна, красива у своїй унікальності. Кремова піна не пересушує, вона м'яко огортає й підкреслює природну текстуру, даруючи шкірі спокій і свободу дихати.
+            </p>
+          </div>
         </FadeIn>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

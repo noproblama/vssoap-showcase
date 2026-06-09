@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
-import { BotanicalPatternBg, SoapWaveBg } from "./DecorativeElements";
+import { SoapWaveBg } from "./DecorativeElements";
 import { FadeIn } from "./FadeIn";
 import { asset } from "../lib/asset";
 
@@ -158,19 +158,18 @@ function CreatorCarousel() {
 export function About() {
   return (
     <section
-      className="relative py-20 px-6 bg-[#F9F6F1] overflow-hidden"
+      className="relative py-20 px-6 bg-[#F4F4F4] overflow-hidden"
       id="about"
     >
-      <div className="absolute inset-0 pointer-events-none opacity-[0.06] text-stone-600">
-        <BotanicalPatternBg />
-      </div>
-
       <div className="absolute inset-x-0 -bottom-0 pointer-events-none h-[800px]">
         <SoapWaveBg />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto">
         <FadeIn>
+          <span className="block text-center text-[10px] tracking-[0.25em] uppercase text-sage-600 font-semibold mb-3">
+            Майстерня
+          </span>
           <h2 className="text-4xl md:text-5xl text-center mb-4 text-stone-800">
             Про майстерню
           </h2>
@@ -180,120 +179,123 @@ export function About() {
         </FadeIn>
 
         <FadeIn delay={120}>
-        <div className="bg-white/90 rounded-2xl p-8 md:p-12 shadow-sm space-y-6">
-          <CreatorCarousel />
+          <div className="bg-white/90 rounded-2xl p-8 md:p-12 shadow-sm space-y-6">
+            <CreatorCarousel />
 
-          <AccordionItem
-            title="Суть нашого ремесла"
-            summary="Ми не «варимо» мило — ми створюємо його за автентичною технологією холодного омилення, зберігаючи всі живильні властивості олій."
-          >
-            <p className="text-stone-600 leading-relaxed mb-3">
-              Це процес, де природа і хімія зустрічаються без поспіху. Ми
-              поєднуємо рослинні олії та лужний розчин за кімнатної температури,
-              щоб зберегти вітаміни і живильну молекулу, подаровану землею.
-            </p>
-            <p className="text-stone-600 leading-relaxed mb-3">
-              Чому наш «холодний спосіб» — це магія? На відміну від
-              промислового мила, ми не вилучаємо гліцерин. Він залишається
-              всередині, створюючи на шкірі невидимий захисний бар'єр.
-            </p>
-            <p className="text-stone-600 leading-relaxed">
-              Олії (ши, какао, оливкова, кокосова, пальмова, мигдальна, жожоба,
-              абрикосових кісточок, обліпихова та інші), мацерати (оливкова
-              олія, настояна на травах та квітах), відвари трав та екстракти
-              квітів не піддаються кип'ятінню — ваша шкіра отримує порцію
-              доглядових олій, що не змилися в процесі реакції, та комплекс
-              поживних речовин.
-            </p>
-          </AccordionItem>
+            <AccordionItem
+              title="Суть нашого ремесла"
+              summary="Ми не «варимо» мило — ми створюємо його за автентичною технологією холодного омилення, зберігаючи всі живильні властивості олій."
+            >
+              <p className="text-stone-600 leading-relaxed mb-3">
+                Це процес, де природа і хімія зустрічаються без поспіху. Ми
+                поєднуємо рослинні олії та лужний розчин за кімнатної
+                температури, щоб зберегти вітаміни і живильну молекулу,
+                подаровану землею.
+              </p>
+              <p className="text-stone-600 leading-relaxed mb-3">
+                Чому наш «холодний спосіб» — це магія? На відміну від
+                промислового мила, ми не вилучаємо гліцерин. Він залишається
+                всередині, створюючи на шкірі невидимий захисний бар'єр.
+              </p>
+              <p className="text-stone-600 leading-relaxed">
+                Олії (ши, какао, оливкова, кокосова, пальмова, мигдальна,
+                жожоба, абрикосових кісточок, обліпихова та інші), мацерати
+                (оливкова олія, настояна на травах та квітах), відвари трав та
+                екстракти квітів не піддаються кип'ятінню — ваша шкіра отримує
+                порцію доглядових олій, що не змилися в процесі реакції, та
+                комплекс поживних речовин.
+              </p>
+            </AccordionItem>
 
-          <AccordionItem
-            title="Витримка від 6 тижнів до 6 місяців"
-            summary="Кожен брусок «дозріває» понад місяць у спеціальних умовах."
-          >
-            <p className="text-stone-600 leading-relaxed">
-              За цей час він стає твердим, ніжним та безпечним — як витримане
-              вино. Тільки після повного дозрівання мило потрапляє до вас.
-            </p>
-          </AccordionItem>
+            <AccordionItem
+              title="Витримка від 6 тижнів до 6 місяців"
+              summary="Кожен брусок «дозріває» понад місяць у спеціальних умовах."
+            >
+              <p className="text-stone-600 leading-relaxed">
+                За цей час він стає твердим, ніжним та безпечним — як витримане
+                вино. Тільки після повного дозрівання мило потрапляє до вас.
+              </p>
+            </AccordionItem>
 
-          <AccordionItem
-            title="Наші принципи — чистота у всьому"
-            summary="Жодних промислових ПАРів (SLS), парабенів чи штучних піноутворювачів — тільки натуральне."
-          >
-            <p className="text-stone-600 leading-relaxed mb-3">
-              Ми фарбуємо мило глинами, травами та спеціями. Аромат дарують
-              лише 100% чисті ефірні олії, а не дешеві віддушки.
-            </p>
-            <p className="text-stone-600 leading-relaxed">
-              Ми дбаємо про планету так само, як про ваше тіло. Наше пакування
-              — це папір, джут, натуральна деревина і жодного грама пластику.
-            </p>
-          </AccordionItem>
+            <AccordionItem
+              title="Наші принципи — чистота у всьому"
+              summary="Жодних промислових ПАРів (SLS), парабенів чи штучних піноутворювачів — тільки натуральне."
+            >
+              <p className="text-stone-600 leading-relaxed mb-3">
+                Ми фарбуємо мило глинами, травами та спеціями. Аромат дарують
+                лише 100% чисті ефірні олії, а не дешеві віддушки.
+              </p>
+              <p className="text-stone-600 leading-relaxed">
+                Ми дбаємо про планету так само, як про ваше тіло. Наше пакування
+                — це папір, джут, натуральна деревина і жодного грама пластику.
+              </p>
+            </AccordionItem>
 
-          <AccordionItem
-            title="Для кого ми створюємо?"
-            summary="Для тих, хто стомився від хімії та хоче справжнього догляду — простого, чистого, природного."
-          >
-            <ul className="text-stone-600 leading-relaxed space-y-2 mb-5">
-              <li className="flex gap-2">
-                <span className="shrink-0">—</span>
-                <span>стомився від відчуття стягнутості шкіри після душу;</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="shrink-0">—</span>
-                <span>
-                  має чутливу шкіру і розуміє, що справжнє зволоження
-                  починається з дбайливого очищення без синтетичних ПАР;
-                </span>
-              </li>
-              <li className="flex gap-2">
-                <span className="shrink-0">—</span>
-                <span>
-                  цінує естетику в деталях, перетворює звичайне миття рук на
-                  маленький ритуал любові до себе і обирає свідоме споживання;
-                </span>
-              </li>
-              <li className="flex gap-2">
-                <span className="shrink-0">—</span>
-                <span>
-                  читає склад раніше, ніж назву і обирає безпеку для своєї
-                  шкіри та планети;
-                </span>
-              </li>
-              <li className="flex gap-2">
-                <span className="shrink-0">—</span>
-                <span>
-                  прагне жити в гармонії з природою, відмовляючись від зайвої
-                  хімії на користь чистих рослинних олій;
-                </span>
-              </li>
-              <li className="flex gap-2">
-                <span className="shrink-0">—</span>
-                <span>
-                  цінує чесність складу: лише омилені олії, глини, трави,
-                  ефірні екстракти — лише те, що дає природа;
-                </span>
-              </li>
-              <li className="flex gap-2">
-                <span className="shrink-0">—</span>
-                <span>бачить не просто форму, а відчуває душу;</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="shrink-0">—</span>
-                <span>
-                  обирає справжнє замість штучного, цінує здоров'я своєї шкіри
-                  та вірить, що розкіш криється у простоті та натуральності.
-                </span>
-              </li>
-            </ul>
-            <p className="text-stone-600 leading-relaxed italic">
-              Наше творіння — це гігієна та ранковий ритуал любові до себе,
-              втілений у шматочку шовковистої піни. Кожен брусок мила —
-              унікальна композиція, новий спа досвід.
-            </p>
-          </AccordionItem>
-        </div>
+            <AccordionItem
+              title="Для кого ми створюємо?"
+              summary="Для тих, хто стомився від хімії та хоче справжнього догляду — простого, чистого, природного."
+            >
+              <ul className="text-stone-600 leading-relaxed space-y-2 mb-5">
+                <li className="flex gap-2">
+                  <span className="shrink-0">—</span>
+                  <span>
+                    стомився від відчуття стягнутості шкіри після душу;
+                  </span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="shrink-0">—</span>
+                  <span>
+                    має чутливу шкіру і розуміє, що справжнє зволоження
+                    починається з дбайливого очищення без синтетичних ПАР;
+                  </span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="shrink-0">—</span>
+                  <span>
+                    цінує естетику в деталях, перетворює звичайне миття рук на
+                    маленький ритуал любові до себе і обирає свідоме споживання;
+                  </span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="shrink-0">—</span>
+                  <span>
+                    читає склад раніше, ніж назву і обирає безпеку для своєї
+                    шкіри та планети;
+                  </span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="shrink-0">—</span>
+                  <span>
+                    прагне жити в гармонії з природою, відмовляючись від зайвої
+                    хімії на користь чистих рослинних олій;
+                  </span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="shrink-0">—</span>
+                  <span>
+                    цінує чесність складу: лише омилені олії, глини, трави,
+                    ефірні екстракти — лише те, що дає природа;
+                  </span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="shrink-0">—</span>
+                  <span>бачить не просто форму, а відчуває душу;</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="shrink-0">—</span>
+                  <span>
+                    обирає справжнє замість штучного, цінує здоров'я своєї шкіри
+                    та вірить, що розкіш криється у простоті та натуральності.
+                  </span>
+                </li>
+              </ul>
+              <p className="text-stone-600 leading-relaxed italic">
+                Наше творіння — це гігієна та ранковий ритуал любові до себе,
+                втілений у шматочку шовковистої піни. Кожен брусок мила —
+                унікальна композиція, новий спа досвід.
+              </p>
+            </AccordionItem>
+          </div>
         </FadeIn>
       </div>
     </section>

@@ -1,6 +1,7 @@
+import { useRef } from "react";
 import type { Product } from "../data/products";
 import { FadeIn } from "./FadeIn";
-import { Sparkles } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
 import { SoapPlaceholder } from "./SoapPlaceholder";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
@@ -11,74 +12,207 @@ interface ProductCardProps {
   onClick?: () => void;
 }
 
-export function ProductCard({ product, index = 0, loading, onClick }: ProductCardProps) {
+function ProfileMini({ product }: { product: Product }) {
+  const { profile } = product;
+  if (!profile) return null;
+  const { scent, lather, hardness, skinType } = profile;
+
+  return (
+    <div className="mt-3 pt-3 border-t border-stone-200/70 grid grid-cols-2 gap-x-3 gap-y-2.5">
+      {scent && (
+        <div>
+          <div className="text-[8px] uppercase tracking-wider text-stone-600 mb-0.5">
+            Аромат
+          </div>
+          <p className="text-[10px] text-stone-600 leading-snug mb-1">
+            {scent.label}
+          </p>
+          <div className="flex gap-0.5">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <span
+                key={i}
+                className={`h-[3px] flex-1 rounded-full ${i <= scent.intensity ? "bg-amber-400" : "bg-stone-200"}`}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+      {lather && (
+        <div>
+          <div className="text-[8px] uppercase tracking-wider text-stone-600 mb-0.5">
+            Піна
+          </div>
+          <p className="text-[10px] text-stone-600 leading-snug mb-1">
+            {lather.label}
+          </p>
+          <div className="flex gap-0.5">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <span
+                key={i}
+                className={`h-[3px] flex-1 rounded-full ${i <= lather.strength ? "bg-sage-500" : "bg-stone-200"}`}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+      {hardness && (
+        <div>
+          <div className="text-[8px] uppercase tracking-wider text-stone-600 mb-0.5">
+            Твердість
+          </div>
+          <p className="text-[10px] text-stone-600 leading-snug mb-1">
+            {hardness.label}
+          </p>
+          <div className="flex gap-0.5">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <span
+                key={i}
+                className={`h-[3px] flex-1 rounded-full ${i <= hardness.level ? "bg-sage-700" : "bg-stone-200"}`}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+      {skinType && (
+        <div>
+          <div className="text-[8px] uppercase tracking-wider text-stone-600 mb-1">
+            Для шкіри
+          </div>
+          <p className="text-[10px] text-stone-600 leading-snug">{skinType}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function ProductCard({
+  product,
+  index = 0,
+  loading,
+  onClick,
+}: ProductCardProps) {
   const isPremium = product.category === "premium";
   const isCuring = product.status === "curing";
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleMouseEnter = () => {
+    videoRef.current?.play().catch(() => {});
+  };
+
+  const handleMouseLeave = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
 
   return (
     <FadeIn delay={index * 80}>
-    <div
-      className="group relative h-full rounded-xl overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer bg-sage-200"
-      onClick={onClick}
-    >
-      <div className="relative aspect-square overflow-hidden bg-stone-100">
-        {product.image.startsWith("/") ? (
-          <ImageWithFallback
-            src={product.image}
-            alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          />
-        ) : (
-          <SoapPlaceholder
-            name={product.name}
-            className="w-full h-full group-hover:scale-105 transition-transform duration-500"
-          />
-        )}
+      <div
+        className="group relative h-full rounded-xl overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer bg-[#F9F6F1]/70 backdrop-blur-md border border-[#F9F6F1]/90"
+        onClick={onClick}
+      >
+        <div
+          className="relative aspect-square overflow-hidden bg-stone-100"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          {product.image.startsWith("/") ? (
+            <ImageWithFallback
+              src={product.image}
+              alt={product.name}
+              className={`w-full h-full object-cover transition-all duration-500 ${
+                product.videoUrl
+                  ? "group-hover:opacity-0"
+                  : "group-hover:scale-105"
+              }`}
+            />
+          ) : (
+            <SoapPlaceholder
+              name={product.name}
+              className="w-full h-full group-hover:scale-105 transition-transform duration-500"
+            />
+          )}
 
-        {/* ── Top-right: premium badge ───────────────────────────────── */}
-        {isPremium && (
-          <div className="absolute top-4 right-4 inline-flex items-center gap-1 bg-sage-700 text-white px-3 py-1 rounded-full text-sm z-10">
-            <Sparkles className="w-3 h-3" />
-            Premium
-          </div>
-        )}
+          {/* Video overlay — plays on hover */}
+          {product.videoUrl && (
+            <video
+              ref={videoRef}
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+            >
+              <source src={product.videoUrl} type="video/mp4" />
+            </video>
+          )}
 
-        {/* ── Bottom-left: readiness badge ───────────────────────────── */}
-        {product.status && !loading && (
-          <div className="absolute bottom-3 left-3 z-10 animate-fade-in">
-            {isCuring ? (
-              <span className="inline-flex items-center gap-1.5 bg-stone-900/70 backdrop-blur-sm text-white px-2.5 py-1 rounded-full text-xs">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-300 animate-pulse" />
-                {product.cureUntil
-                  ? `Дозріває до ${product.cureUntil}`
-                  : "Дозріває"}
-              </span>
+          {isPremium && (
+            <div className="absolute top-4 right-4 inline-flex items-center gap-1 bg-sage-700 text-white px-3 py-1 rounded-full text-sm z-10">
+              <Sparkles className="w-3 h-3" />
+              Premium
+            </div>
+          )}
+
+          {product.status && !loading && (
+            <div className="absolute bottom-3 left-3 z-10 animate-fade-in">
+              {isCuring ? (
+                <span className="inline-flex items-center gap-1.5 bg-stone-900/70 backdrop-blur-sm text-white px-2.5 py-1 rounded-full text-xs">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-300 animate-pulse" />
+                  {product.cureUntil
+                    ? `Дозріває до ${product.cureUntil}`
+                    : "Дозріває"}
+                </span>
+              ) : (
+                <span className="inline-flex items-center gap-1.5 bg-white/85 backdrop-blur-sm text-sage-800 px-2.5 py-1 rounded-full text-xs">
+                  <span className="w-1.5 h-1.5 rounded-full bg-sage-600" />
+                  Готове
+                </span>
+              )}
+            </div>
+          )}
+        </div>
+
+        <div className="p-5">
+          <div className="flex justify-between items-start mb-1">
+            <h3 className="text-xl text-stone-800">{product.name}</h3>
+            {loading ? (
+              <span className="inline-block w-24 h-5 rounded bg-stone-200 animate-pulse shrink-0 ml-2" />
             ) : (
-              <span className="inline-flex items-center gap-1.5 bg-white/85 backdrop-blur-sm text-sage-800 px-2.5 py-1 rounded-full text-xs">
-                <span className="w-1.5 h-1.5 rounded-full bg-sage-600" />
-                Готове
+              <span className="text-lg text-sage-700 shrink-0 ml-2 animate-fade-in">
+                {product.price}
               </span>
             )}
           </div>
-        )}
-      </div>
-
-      <div className="p-5">
-        <div className="flex justify-between items-start mb-2">
-          <h3 className="text-xl text-stone-800">{product.name}</h3>
-          {loading ? (
-            <span className="inline-block w-24 h-5 rounded bg-stone-200 animate-pulse shrink-0 ml-2" />
-          ) : (
-            <span className="text-lg text-sage-700 shrink-0 ml-2 animate-fade-in">
-              {product.price}
-            </span>
+          {product.tagline && (
+            <p
+              className="text-sm text-stone-600 mb-3 leading-snug"
+              style={{ fontFamily: "var(--font-display)", fontStyle: "italic" }}
+            >
+              {product.tagline}
+            </p>
           )}
+
+          {product.benefits && product.benefits.length > 0 && (
+            <div className="flex flex-wrap gap-1.5">
+              {product.benefits.slice(0, 3).map((b, i) => (
+                <span key={i} className="text-[10px] bg-stone-900/6 text-stone-700 px-2.5 py-1 rounded-full leading-none">
+                  {b}
+                </span>
+              ))}
+            </div>
+          )}
+
+          <ProfileMini product={product} />
+
+          <div className="mt-4 flex items-center justify-end gap-1.5 text-sage-500 group-hover:text-sage-700 transition-colors duration-300">
+            <span className="text-[10px] tracking-[0.15em] uppercase font-semibold">
+              Детальніше
+            </span>
+            <ArrowRight className="w-3 h-3" />
+          </div>
         </div>
-        <p className="text-stone-600 text-sm leading-relaxed">
-          {product.description}
-        </p>
       </div>
-    </div>
     </FadeIn>
   );
 }

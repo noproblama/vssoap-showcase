@@ -6,6 +6,9 @@ import {
   ChevronDown,
   Play,
   Sparkles,
+  Share2,
+  Check,
+  Copy,
 } from "lucide-react";
 import { SoapPlaceholder } from "./SoapPlaceholder";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
@@ -318,7 +321,7 @@ function QuickMessengers({ productName }: { productName: string }) {
 
   return (
     <div className="flex items-center justify-center gap-2 mt-3">
-      <span className="text-xs text-stone-500 mr-1">або одразу написати:</span>
+      <span className="text-xs text-stone-500 mr-1">Наші контакти:</span>
       <a
         href={viberUrl}
         onClick={copyMessage}
@@ -330,7 +333,11 @@ function QuickMessengers({ productName }: { productName: string }) {
           <path d="M13 4C12.4477 4 12 4.44772 12 5C12 5.55228 12.4477 6 13 6C14.2728 6 15.2557 6.41989 15.9179 7.08211C16.5801 7.74433 17 8.72725 17 10C17 10.5523 17.4477 11 18 11C18.5523 11 19 10.5523 19 10C19 8.27275 18.4199 6.75567 17.3321 5.66789C16.2443 4.58011 14.7272 4 13 4Z" />
           <path d="M5.014 8.00613C5.12827 7.1024 6.30277 5.87414 7.23488 6.01043C8.01251 6.15699 8.65217 7.32965 9.07373 8.10246C9.14298 8.22942 9.20635 8.34559 9.26349 8.44465C9.55041 8.95402 9.3641 9.4701 9.09655 9.68787C9.06561 9.7128 9.03317 9.73855 8.9998 9.76504C8.64376 10.0477 8.18114 10.4149 8.28943 10.7834C8.5 11.5 11 14 12.2296 14.7107C12.6061 14.9283 12.8988 14.5057 13.1495 14.1438C13.2087 14.0583 13.2656 13.9762 13.3207 13.9067C13.5301 13.6271 14.0466 13.46 14.5548 13.736C15.3138 14.178 16.0288 14.6917 16.69 15.27C17.0202 15.546 17.0977 15.9539 16.8689 16.385C16.4659 17.1443 15.3003 18.1456 14.4542 17.9421C12.9764 17.5868 7 15.27 5.08033 8.55801C4.97981 8.26236 4.99645 8.13792 5.01088 8.02991L5.014 8.00613Z" />
           <path d="M13 7C12.4477 7 12 7.44772 12 8C12 8.55228 12.4477 9 13 9C13.1748 9 13.4332 9.09745 13.6679 9.33211C13.9025 9.56676 14 9.82523 14 10C14 10.5523 14.4477 11 15 11C15.5523 11 16 10.5523 16 10C16 9.17477 15.5975 8.43324 15.0821 7.91789C14.5668 7.40255 13.8252 7 13 7Z" />
-          <path fillRule="evenodd" clipRule="evenodd" d="M7.51742 23.8312C7.54587 23.8469 7.57508 23.8612 7.60492 23.874C8.14762 24.1074 8.81755 23.5863 10.1574 22.5442L11.5 21.5C14.1884 21.589 16.514 21.2362 18.312 20.6071C20.3227 19.9035 21.9036 18.3226 22.6072 16.3119C23.5768 13.541 23.5768 8.45883 22.6072 5.68794C21.9036 3.67722 20.3227 2.0963 18.312 1.39271C15.1103 0.272407 8.82999 0.293306 5.68806 1.39271C3.67733 2.0963 2.09642 3.67722 1.39283 5.68794C0.423255 8.45883 0.423255 13.541 1.39283 16.3119C2.09642 18.3226 3.67733 19.9035 5.68806 20.6071C6.08252 20.7451 6.52371 20.8965 7 21C7 22.6974 7 23.5461 7.51742 23.8312ZM9 20.9107V19.7909C9 19.5557 8.836 19.3524 8.60597 19.3032C7.84407 19.1403 7.08676 18.9776 6.34862 18.7193C4.91238 18.2168 3.78316 17.0875 3.2806 15.6513C2.89871 14.5599 2.66565 12.8453 2.66565 10.9999C2.66565 9.15453 2.89871 7.43987 3.2806 6.3485C3.78316 4.91227 4.91238 3.78304 6.34862 3.28048C7.61625 2.83692 9.71713 2.56282 11.9798 2.56032C14.2422 2.55782 16.3561 2.82723 17.6514 3.28048C19.0876 3.78304 20.2169 4.91227 20.7194 6.3485C21.1013 7.43987 21.3344 9.15453 21.3344 10.9999C21.3344 12.8453 21.1013 14.5599 20.7194 15.6513C20.2169 17.0875 19.0876 18.2168 17.6514 18.7193C15.5197 19.4652 13.259 19.549 11.0239 19.4828C10.9071 19.4794 10.7926 19.5165 10.7004 19.5882L9 20.9107Z" />
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M7.51742 23.8312C7.54587 23.8469 7.57508 23.8612 7.60492 23.874C8.14762 24.1074 8.81755 23.5863 10.1574 22.5442L11.5 21.5C14.1884 21.589 16.514 21.2362 18.312 20.6071C20.3227 19.9035 21.9036 18.3226 22.6072 16.3119C23.5768 13.541 23.5768 8.45883 22.6072 5.68794C21.9036 3.67722 20.3227 2.0963 18.312 1.39271C15.1103 0.272407 8.82999 0.293306 5.68806 1.39271C3.67733 2.0963 2.09642 3.67722 1.39283 5.68794C0.423255 8.45883 0.423255 13.541 1.39283 16.3119C2.09642 18.3226 3.67733 19.9035 5.68806 20.6071C6.08252 20.7451 6.52371 20.8965 7 21C7 22.6974 7 23.5461 7.51742 23.8312ZM9 20.9107V19.7909C9 19.5557 8.836 19.3524 8.60597 19.3032C7.84407 19.1403 7.08676 18.9776 6.34862 18.7193C4.91238 18.2168 3.78316 17.0875 3.2806 15.6513C2.89871 14.5599 2.66565 12.8453 2.66565 10.9999C2.66565 9.15453 2.89871 7.43987 3.2806 6.3485C3.78316 4.91227 4.91238 3.78304 6.34862 3.28048C7.61625 2.83692 9.71713 2.56282 11.9798 2.56032C14.2422 2.55782 16.3561 2.82723 17.6514 3.28048C19.0876 3.78304 20.2169 4.91227 20.7194 6.3485C21.1013 7.43987 21.3344 9.15453 21.3344 10.9999C21.3344 12.8453 21.1013 14.5599 20.7194 15.6513C20.2169 17.0875 19.0876 18.2168 17.6514 18.7193C15.5197 19.4652 13.259 19.549 11.0239 19.4828C10.9071 19.4794 10.7926 19.5165 10.7004 19.5882L9 20.9107Z"
+          />
         </svg>
       </a>
       <a
@@ -343,7 +350,11 @@ function QuickMessengers({ productName }: { productName: string }) {
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
           <path d="M6.014 8.00613C6.12827 7.1024 7.30277 5.87414 8.23488 6.01043C9.14051 6.18132 9.85859 7.74261 10.2635 8.44465C10.5504 8.95402 10.3641 9.4701 10.0965 9.68787C9.7355 9.97883 9.17099 10.3803 9.28943 10.7834C9.5 11.5 12 14 13.2296 14.7107C13.695 14.9797 14.0325 14.2702 14.3207 13.9067C14.5301 13.6271 15.0466 13.46 15.5548 13.736C16.3138 14.178 17.0288 14.6917 17.69 15.27C18.0202 15.546 18.0977 15.9539 17.8689 16.385C17.4659 17.1443 16.3003 18.1456 15.4542 17.9421C13.9764 17.5868 8 15.27 6.08033 8.55801C5.97237 8.24048 5.99955 8.12044 6.014 8.00613Z" />
-          <path fillRule="evenodd" clipRule="evenodd" d="M12 23C10.7764 23 10.0994 22.8687 9 22.5L6.89443 23.5528C5.56462 24.2177 4 23.2507 4 21.7639V19.5C1.84655 17.492 1 15.1767 1 12C1 5.92487 5.92487 1 12 1C18.0751 1 23 5.92487 23 12C23 18.0751 18.0751 23 12 23ZM6 18.6303L5.36395 18.0372C3.69087 16.4772 3 14.7331 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C11.0143 21 10.552 20.911 9.63595 20.6038L8.84847 20.3397L6 21.7639V18.6303Z" />
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M12 23C10.7764 23 10.0994 22.8687 9 22.5L6.89443 23.5528C5.56462 24.2177 4 23.2507 4 21.7639V19.5C1.84655 17.492 1 15.1767 1 12C1 5.92487 5.92487 1 12 1C18.0751 1 23 5.92487 23 12C23 18.0751 18.0751 23 12 23ZM6 18.6303L5.36395 18.0372C3.69087 16.4772 3 14.7331 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C11.0143 21 10.552 20.911 9.63595 20.6038L8.84847 20.3397L6 21.7639V18.6303Z"
+          />
         </svg>
       </a>
       <a
@@ -376,6 +387,21 @@ export function ProductModal({
 }: ProductModalProps) {
   const isPremium = product.category === "premium";
   const [activeIndex, setActiveIndex] = useState(0);
+  const [shareUrl, setShareUrl] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const handleShare = async () => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("product", product.slug);
+    const fullUrl = url.toString();
+    setShareUrl(fullUrl);
+    try {
+      await navigator.clipboard.writeText(fullUrl);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    }
+  };
 
   const allMedia = [
     { type: "image" as const, src: product.image },
@@ -390,6 +416,8 @@ export function ProductModal({
 
   useEffect(() => {
     setActiveIndex(0);
+    setShareUrl(null);
+    setCopied(false);
   }, [product.id]);
 
   useEffect(() => {
@@ -466,13 +494,53 @@ export function ProductModal({
             </button>
 
             <button
-              onClick={onClose}
+              onClick={handleShare}
               className="p-2 rounded-full hover:bg-stone-100 transition-colors text-stone-400 hover:text-stone-700 ml-0.5"
+              aria-label="Поділитись"
+              title="Скопіювати посилання"
+            >
+              {copied ? (
+                <Check className="w-4 h-4 text-sage-600" />
+              ) : (
+                <Share2 className="w-4 h-4" />
+              )}
+            </button>
+
+            <button
+              onClick={onClose}
+              className="p-2 rounded-full hover:bg-stone-100 transition-colors text-stone-400 hover:text-stone-700"
               aria-label="Закрити"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
+
+          {/* Share bar */}
+          {shareUrl && (
+            <div className="bg-[#f7f3eb] border-b border-stone-100 px-4 py-2 flex items-center gap-2">
+              {copied ? (
+                <Check className="w-3.5 h-3.5 text-sage-600 shrink-0" />
+              ) : (
+                <Copy className="w-3.5 h-3.5 text-stone-400 shrink-0" />
+              )}
+              <span className="text-xs text-stone-500 shrink-0">
+                {copied ? "Посилання скопійовано:" : "Скопіюйте посилання:"}
+              </span>
+              <input
+                readOnly
+                value={shareUrl}
+                onClick={(e) => (e.currentTarget.select())}
+                className="flex-1 min-w-0 text-xs bg-white border border-stone-200 rounded px-2 py-1 text-stone-600 cursor-text select-all"
+              />
+              <button
+                onClick={() => setShareUrl(null)}
+                className="shrink-0 text-stone-300 hover:text-stone-500 transition-colors"
+                aria-label="Закрити"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          )}
 
           {/* ── Scrollable content ── */}
           <div className="overflow-y-auto overflow-x-hidden flex-1 relative">
@@ -555,18 +623,27 @@ export function ProductModal({
                 </div>
               )}
 
-              {/* ── Tagline (1-line promise) ─────────────────────── */}
-              {product.tagline && (
-                <p
-                  className="text-stone-700 italic text-lg md:text-xl leading-snug mb-4 mt-1"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
-                  {product.tagline}
-                </p>
+              {/* ── Master note ──────────────────────────────────── */}
+              {product.masterNote && (
+                <div className="relative z-10">
+                  <MasterNote text={product.masterNote} />
+                </div>
               )}
 
-              {/* ── Profile panel (scent / lather / hardness / skin) ─ */}
-              {product.profile && <ProfilePanel profile={product.profile} />}
+              {/* ── Benefits ("Що дає шкірі") ─────────────────────── */}
+              {product.benefits && product.benefits.length > 0 && (
+                <div className="relative z-10 mb-4">
+                  <h3 className="text-lg text-stone-800 mb-2">Переваги</h3>
+                  <ul className="space-y-1">
+                    {product.benefits.map((benefit, index) => (
+                      <li key={index} className="text-stone-600 text-sm md:text-base flex items-start">
+                        <span className="text-sage-600 mr-2">✓</span>
+                        {benefit}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               {/* ── Description (intro always visible) ───────────── */}
               <div className="relative z-10 mb-2">
@@ -584,41 +661,13 @@ export function ProductModal({
                 </div>
               )}
 
-              {/* ── Master note ──────────────────────────────────── */}
-              {product.masterNote && (
-                <div className="relative z-10">
-                  <MasterNote text={product.masterNote} />
-                </div>
-              )}
-
               {/* ── Key ingredients (3-5 heroes with role) ───────── */}
-              {product.keyIngredients &&
-                product.keyIngredients.length > 0 && (
-                  <div className="relative z-10 mb-4">
-                    <h3 className="text-lg text-stone-800 mb-2">
-                      Головні складники
-                    </h3>
-                    <KeyIngredients items={product.keyIngredients} />
-                  </div>
-                )}
-
-              {/* ── Benefits (renamed "Що дає шкірі") ────────────── */}
-              {product.benefits && product.benefits.length > 0 && (
+              {product.keyIngredients && product.keyIngredients.length > 0 && (
                 <div className="relative z-10 mb-4">
                   <h3 className="text-lg text-stone-800 mb-2">
-                    Що дає шкірі
+                    Головні компоненти
                   </h3>
-                  <ul className="space-y-1">
-                    {product.benefits.map((benefit, index) => (
-                      <li
-                        key={index}
-                        className="text-stone-600 text-sm md:text-base flex items-start"
-                      >
-                        <span className="text-sage-600 mr-2">✓</span>
-                        {benefit}
-                      </li>
-                    ))}
-                  </ul>
+                  <KeyIngredients items={product.keyIngredients} />
                 </div>
               )}
 
@@ -656,14 +705,19 @@ export function ProductModal({
                 <a
                   href="#contact"
                   onClick={onClose}
-                  className="block w-full text-center bg-sage-600 text-white py-3.5 px-8 rounded-full hover:bg-sage-700 transition-all shadow-sm text-base md:text-lg"
+                  className="relative overflow-hidden flex w-full items-center justify-center leading-none bg-sage-600 text-white py-3.5 px-8 rounded-full shadow-sm hover:shadow-md text-[11px] tracking-widest uppercase font-semibold transition-shadow duration-300 group"
                 >
-                  Хочу замовити «{product.name}»
+                  <span
+                    className="absolute inset-y-0 left-0 w-[150%] translate-x-[-150%] group-hover:translate-x-0 transition-transform duration-500 ease-out"
+                    style={{
+                      background:
+                        "linear-gradient(to right, #4f5b45, #4f5b45 67%, transparent 100%)",
+                    }}
+                  />
+                  <span className="relative z-10">
+                    Хочу замовити «{product.name}»
+                  </span>
                 </a>
-                <p className="text-center text-stone-500 mt-2 text-xs">
-                  Напишемо у Viber, WhatsApp або Instagram — допоможемо обрати
-                  кількість і узгодимо доставку
-                </p>
 
                 <QuickMessengers productName={product.name} />
 
