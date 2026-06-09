@@ -25,6 +25,8 @@ import {
 } from "./DecorativeElements";
 import type { ComponentType } from "react";
 import type { SoapProfile, KeyIngredient, Product } from "../data/products";
+import { useLang } from "../i18n/LangContext";
+import { translations } from "../i18n/translations";
 
 interface ProductModalProps {
   product: Product;
@@ -164,6 +166,8 @@ function DotBar({
 
 /* ── profile panel: scent | lather | hardness | skin type ─────────── */
 function ProfilePanel({ profile }: { profile: SoapProfile }) {
+  const { lang } = useLang();
+  const T = translations[lang];
   const items: Array<{
     key: string;
     label: string;
@@ -175,7 +179,7 @@ function ProfilePanel({ profile }: { profile: SoapProfile }) {
   if (profile.scent)
     items.push({
       key: "scent",
-      label: "Аромат",
+      label: T.card_scent,
       value: profile.scent.label,
       bar: profile.scent.intensity,
       accent: "bg-amber-400",
@@ -183,21 +187,21 @@ function ProfilePanel({ profile }: { profile: SoapProfile }) {
   if (profile.lather)
     items.push({
       key: "lather",
-      label: "Піна",
+      label: T.card_lather,
       value: profile.lather.label,
       bar: profile.lather.strength,
     });
   if (profile.hardness)
     items.push({
       key: "hardness",
-      label: "Твердість",
+      label: T.card_hardness,
       value: profile.hardness.label,
       bar: profile.hardness.level,
     });
   if (profile.skinType)
     items.push({
       key: "skin",
-      label: "Для шкіри",
+      label: T.card_skintype,
       value: profile.skinType,
     });
 
@@ -228,13 +232,15 @@ function ProfilePanel({ profile }: { profile: SoapProfile }) {
 
 /* ── master's note (no author label) ──────────────────────────────── */
 function MasterNote({ text }: { text: string }) {
+  const { lang } = useLang();
+  const T = translations[lang];
   return (
     <div
       className="relative my-5 px-5 py-4 rounded-xl border"
       style={{ background: "#f7efde", borderColor: "#ecddb8" }}
     >
       <div className="text-[10px] uppercase tracking-[0.14em] text-stone-500 mb-1.5">
-        З майстерні
+        {T.modal_from_workshop}
       </div>
       <p
         className="text-stone-700 italic leading-relaxed text-[15px] md:text-base"
@@ -271,6 +277,8 @@ function KeyIngredients({ items }: { items: KeyIngredient[] }) {
 /* ── full ingredient list (collapsed by default) ──────────────────── */
 function FullIngredients({ list }: { list: string[] }) {
   const [open, setOpen] = useState(false);
+  const { lang } = useLang();
+  const T = translations[lang];
   return (
     <div className="border-t border-stone-100">
       <button
@@ -278,7 +286,7 @@ function FullIngredients({ list }: { list: string[] }) {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
       >
-        <h4 className="text-base md:text-lg text-stone-800">Повний склад</h4>
+        <h4 className="text-base md:text-lg text-stone-800">{T.modal_full_ingredients}</h4>
         <ChevronDown
           className={`w-4 h-4 text-stone-400 shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
         />
@@ -306,7 +314,9 @@ function FullIngredients({ list }: { list: string[] }) {
 
 /* ── quick messengers row (prefilled message where supported) ─────── */
 function QuickMessengers({ productName }: { productName: string }) {
-  const msg = `Доброго дня! Хочу замовити мило «${productName}». Підкажіть, будь ласка, деталі.`;
+  const { lang } = useLang();
+  const T = translations[lang];
+  const msg = T.modal_order_msg(productName);
   const waUrl = `https://wa.me/380966087578?text=${encodeURIComponent(msg)}`;
   const viberUrl = `viber://chat?number=%2B380966087578`;
   const igUrl = `https://ig.me/m/_vele_slava`;
@@ -321,12 +331,12 @@ function QuickMessengers({ productName }: { productName: string }) {
 
   return (
     <div className="flex items-center justify-center gap-2 mt-3">
-      <span className="text-xs text-stone-500 mr-1">Наші контакти:</span>
+      <span className="text-xs text-stone-500 mr-1">{T.modal_contacts}</span>
       <a
         href={viberUrl}
         onClick={copyMessage}
         aria-label="Написати у Viber"
-        title="Viber — повідомлення скопійоване"
+        title={T.modal_viber_title}
         className="w-8 h-8 rounded-full bg-stone-100 hover:bg-sage-200 transition-colors flex items-center justify-center text-stone-600"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
@@ -345,7 +355,7 @@ function QuickMessengers({ productName }: { productName: string }) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Написати у WhatsApp"
-        title="WhatsApp"
+        title={T.modal_wa_title}
         className="w-8 h-8 rounded-full bg-stone-100 hover:bg-sage-200 transition-colors flex items-center justify-center text-stone-600"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
@@ -363,7 +373,7 @@ function QuickMessengers({ productName }: { productName: string }) {
         rel="noopener noreferrer"
         onClick={copyMessage}
         aria-label="Написати у Instagram"
-        title="Instagram — повідомлення скопійоване"
+        title={T.modal_ig_title}
         className="w-8 h-8 rounded-full bg-stone-100 hover:bg-sage-200 transition-colors flex items-center justify-center text-stone-600"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
@@ -385,10 +395,23 @@ export function ProductModal({
   onNext,
   onPrevious,
 }: ProductModalProps) {
+  const { lang } = useLang();
+  const T = translations[lang];
   const isPremium = product.category === "premium";
   const [activeIndex, setActiveIndex] = useState(0);
   const [shareUrl, setShareUrl] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+
+  const name = lang === "en" ? (product.en?.name ?? product.name) : product.name;
+  const masterNote = lang === "en" ? (product.en?.masterNote ?? product.masterNote) : product.masterNote;
+  const benefits = lang === "en" ? (product.en?.benefits ?? product.benefits) : product.benefits;
+  const detailedDescription = lang === "en" ? (product.en?.detailedDescription ?? product.detailedDescription) : product.detailedDescription;
+  const ingredients = lang === "en" ? (product.en?.ingredients ?? product.ingredients) : product.ingredients;
+  const price = lang === "en" ? (product.price_en ?? product.price) : product.price;
+  const cureUntil = lang === "en" ? (product.cureUntil_en ?? product.cureUntil) : product.cureUntil;
+  const stockNote = lang === "en" ? (product.stockNote_en ?? product.stockNote) : product.stockNote;
+  const keyIngredients = lang === "en" ? (product.en?.keyIngredients ?? product.keyIngredients) : product.keyIngredients;
+  const profile = lang === "en" ? (product.en?.profile ?? product.profile) : product.profile;
 
   const handleShare = async () => {
     const url = new URL(window.location.href);
@@ -436,16 +459,16 @@ export function ProductModal({
   const ModalBotanical = modalBotanicals[product.id];
 
   const { intro, sections } = parseDescriptionSections(
-    product.detailedDescription || product.description || "",
+    detailedDescription || product.description || "",
   );
 
   const availabilityText =
-    product.stockNote ??
+    stockNote ??
     (product.status === "curing"
-      ? product.cureUntil
-        ? `Дозріває до ${product.cureUntil} · можна забронювати`
-        : "Зараз дозріває · можна забронювати"
-      : "Наявність уточнюйте");
+      ? cureUntil
+        ? T.modal_curing_until(cureUntil)
+        : T.modal_curing
+      : T.modal_availability);
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -458,14 +481,14 @@ export function ProductModal({
           className="relative w-full h-dvh md:h-auto md:max-w-[720px] md:max-h-[92dvh] flex flex-col bg-white rounded-none md:rounded-2xl shadow-2xl overflow-hidden"
           onClick={(e) => e.stopPropagation()}
         >
-          <DialogTitle className="sr-only">{product.name}</DialogTitle>
+          <DialogTitle className="sr-only">{name}</DialogTitle>
 
           {/* ── Sticky header: prev / title+price / next / close ── */}
           <div className="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-stone-100 px-3 py-2.5 flex items-center gap-1 shrink-0">
             <button
               onClick={onPrevious}
               className="p-2 rounded-full hover:bg-stone-100 transition-colors text-stone-500 hover:text-stone-800"
-              aria-label="Попередній"
+              aria-label={T.modal_prev}
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -473,14 +496,14 @@ export function ProductModal({
             <div className="flex-1 flex items-baseline justify-between px-2 min-w-0">
               <div className="flex items-center gap-2 min-w-0">
                 <h2 className="text-xl md:text-2xl text-stone-800 truncate">
-                  {product.name}
+                  {name}
                 </h2>
               </div>
               {loading ? (
                 <span className="inline-block w-24 h-5 rounded bg-stone-200 animate-pulse shrink-0 ml-3" />
               ) : (
                 <span className="shrink-0 text-lg md:text-xl text-sage-700 ml-3 animate-fade-in">
-                  {product.price}
+                  {price}
                 </span>
               )}
             </div>
@@ -488,7 +511,7 @@ export function ProductModal({
             <button
               onClick={onNext}
               className="p-2 rounded-full hover:bg-stone-100 transition-colors text-stone-500 hover:text-stone-800"
-              aria-label="Наступний"
+              aria-label={T.modal_next}
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -496,8 +519,8 @@ export function ProductModal({
             <button
               onClick={handleShare}
               className="p-2 rounded-full hover:bg-stone-100 transition-colors text-stone-400 hover:text-stone-700 ml-0.5"
-              aria-label="Поділитись"
-              title="Скопіювати посилання"
+              aria-label={T.modal_share}
+              title={T.modal_copy_link_title}
             >
               {copied ? (
                 <Check className="w-4 h-4 text-sage-600" />
@@ -509,7 +532,7 @@ export function ProductModal({
             <button
               onClick={onClose}
               className="p-2 rounded-full hover:bg-stone-100 transition-colors text-stone-400 hover:text-stone-700"
-              aria-label="Закрити"
+              aria-label={T.modal_close}
             >
               <X className="w-5 h-5" />
             </button>
@@ -524,7 +547,7 @@ export function ProductModal({
                 <Copy className="w-3.5 h-3.5 text-stone-400 shrink-0" />
               )}
               <span className="text-xs text-stone-500 shrink-0">
-                {copied ? "Посилання скопійовано:" : "Скопіюйте посилання:"}
+                {copied ? T.modal_copied : T.modal_copy_hint}
               </span>
               <input
                 readOnly
@@ -535,7 +558,7 @@ export function ProductModal({
               <button
                 onClick={() => setShareUrl(null)}
                 className="shrink-0 text-stone-300 hover:text-stone-500 transition-colors"
-                aria-label="Закрити"
+                aria-label={T.modal_close}
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -567,12 +590,12 @@ export function ProductModal({
                   activeMedia.src.startsWith("/") ? (
                     <ImageWithFallback
                       src={activeMedia.src}
-                      alt={product.name}
+                      alt={name}
                       className="w-full h-full object-cover"
                     />
                   ) : (
                     <SoapPlaceholder
-                      name={product.name}
+                      name={name}
                       className="w-full h-full"
                     />
                   )
@@ -604,12 +627,12 @@ export function ProductModal({
                         media.src.startsWith("/") ? (
                           <ImageWithFallback
                             src={media.src}
-                            alt={`${product.name} ${index + 1}`}
+                            alt={`${name} ${index + 1}`}
                             className="w-full h-full object-cover"
                           />
                         ) : (
                           <SoapPlaceholder
-                            name={product.name}
+                            name={name}
                             className="w-full h-full"
                           />
                         )
@@ -623,19 +646,22 @@ export function ProductModal({
                 </div>
               )}
 
+              {/* ── Profile: scent / lather / hardness / skin ────── */}
+              {profile && <ProfilePanel profile={profile} />}
+
               {/* ── Master note ──────────────────────────────────── */}
-              {product.masterNote && (
+              {masterNote && (
                 <div className="relative z-10">
-                  <MasterNote text={product.masterNote} />
+                  <MasterNote text={masterNote} />
                 </div>
               )}
 
-              {/* ── Benefits ("Що дає шкірі") ─────────────────────── */}
-              {product.benefits && product.benefits.length > 0 && (
+              {/* ── Benefits ─────────────────────────────────────── */}
+              {benefits && benefits.length > 0 && (
                 <div className="relative z-10 mb-4">
-                  <h3 className="text-lg text-stone-800 mb-2">Переваги</h3>
+                  <h3 className="text-lg text-stone-800 mb-2">{T.modal_benefits}</h3>
                   <ul className="space-y-1">
-                    {product.benefits.map((benefit, index) => (
+                    {benefits.map((benefit, index) => (
                       <li key={index} className="text-stone-600 text-sm md:text-base flex items-start">
                         <span className="text-sage-600 mr-2">✓</span>
                         {benefit}
@@ -661,20 +687,20 @@ export function ProductModal({
                 </div>
               )}
 
-              {/* ── Key ingredients (3-5 heroes with role) ───────── */}
-              {product.keyIngredients && product.keyIngredients.length > 0 && (
+              {/* ── Key ingredients ───────────────────────────────── */}
+              {keyIngredients && keyIngredients.length > 0 && (
                 <div className="relative z-10 mb-4">
                   <h3 className="text-lg text-stone-800 mb-2">
-                    Головні компоненти
+                    {T.modal_key_ingredients}
                   </h3>
-                  <KeyIngredients items={product.keyIngredients} />
+                  <KeyIngredients items={keyIngredients} />
                 </div>
               )}
 
               {/* ── Full composition (collapsed) ─────────────────── */}
-              {product.ingredients && product.ingredients.length > 0 && (
+              {ingredients && ingredients.length > 0 && (
                 <div className="relative z-10 mb-2">
-                  <FullIngredients list={product.ingredients} />
+                  <FullIngredients list={ingredients} />
                 </div>
               )}
 
@@ -715,14 +741,14 @@ export function ProductModal({
                     }}
                   />
                   <span className="relative z-10">
-                    Хочу замовити «{product.name}»
+                    {T.modal_order_btn(name)}
                   </span>
                 </a>
 
-                <QuickMessengers productName={product.name} />
+                <QuickMessengers productName={name} />
 
                 <p className="text-center text-stone-400 mt-3 text-xs">
-                  ← → для перегляду інших видів мила
+                  {T.modal_nav_hint}
                 </p>
               </div>
             </div>

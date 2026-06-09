@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 
 export interface SheetRow {
   price?: string;
+  price_en?: string;
   status?: "ready" | "curing";
   cureUntil?: string;
+  cureUntil_en?: string;
   stockNote?: string;
+  stockNote_en?: string;
 }
 
 // ── Setup instructions ────────────────────────────────────────────────────
@@ -54,11 +57,14 @@ export function useSheetData(): {
 
           result[id] = {
             ...(row["price"] ? { price: row["price"] } : {}),
+            ...(row["price_en"] ? { price_en: row["price_en"] } : {}),
             ...(row["status"] === "ready" || row["status"] === "curing"
               ? { status: row["status"] as "ready" | "curing" }
               : {}),
             ...(row["cureuntil"] ? { cureUntil: row["cureuntil"] } : {}),
+            ...(row["cureuntil_en"] ? { cureUntil_en: row["cureuntil_en"] } : {}),
             ...(row["stocknote"] ? { stockNote: row["stocknote"] } : {}),
+            ...(row["stocknote_en"] ? { stockNote_en: row["stocknote_en"] } : {}),
           };
         }
 

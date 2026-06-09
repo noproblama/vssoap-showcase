@@ -1,34 +1,14 @@
 import { Snowflake, ShieldCheck, Sprout, Heart } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { FadeIn } from "./FadeIn";
+import { useLang } from "../i18n/LangContext";
+import { translations } from "../i18n/translations";
+
+const benefitIcons: LucideIcon[] = [Snowflake, ShieldCheck, Sprout, Heart];
 
 export function WhyNatural() {
-  const benefits: { title: string; description: string; Icon: LucideIcon }[] = [
-    {
-      title: "Холодне омилення",
-      description:
-        "Традиційна технологія виготовлення зберігає всі корисні властивості олій та екстрактів. Мило визріває 4-6 тижнів.",
-      Icon: Snowflake,
-    },
-    {
-      title: "Без хімії",
-      description:
-        "Ніяких SLS, парабенів, синтетичних барвників чи ароматизаторів. Тільки натуральні інгредієнти.",
-      Icon: ShieldCheck,
-    },
-    {
-      title: "Екологічно",
-      description:
-        "Біорозкладається повністю, не забруднює води. Упаковка з перероблених матеріалів.",
-      Icon: Sprout,
-    },
-    {
-      title: "Для здоров'я шкіри",
-      description:
-        "Зберігає природний ліпідний бар'єр шкіри, не пересушує, живить натуральним гліцерином.",
-      Icon: Heart,
-    },
-  ];
+  const { lang } = useLang();
+  const T = translations[lang];
 
   return (
     <section
@@ -38,14 +18,13 @@ export function WhyNatural() {
       <div className="relative z-10 max-w-6xl mx-auto">
         <FadeIn>
           <span className="block text-center text-[10px] tracking-[0.25em] uppercase text-stone-700/60 font-semibold mb-3">
-            Мій підхід
+            {T.why_label}
           </span>
           <h2 className="text-4xl md:text-5xl text-center mb-4 text-stone-800">
-            Чому натуральна косметика?
+            {T.why_h2}
           </h2>
           <p className="text-center text-stone-600 mb-16 text-lg max-w-3xl mx-auto">
-            Наша шкіра — це живий орган, який потребує бережного догляду.
-            Натуральне мило — це не просто засіб гігієни, а турбота про здоров'я.
+            {T.why_subtitle}
           </p>
         </FadeIn>
 
@@ -53,23 +32,10 @@ export function WhyNatural() {
         <FadeIn delay={100}>
           <div className="bg-white/85 rounded-2xl p-8 md:p-10 mb-10">
             <p className="text-stone-700 text-base md:text-lg leading-relaxed mb-7">
-              У кожен брусочок я закладаю три важливі сенси:
+              {T.why_manifesto_intro}
             </p>
             <div className="space-y-6 mb-8">
-              {[
-                {
-                  label: "Абсолютна натуральність",
-                  text: "Довіряю тому, що створила Земля — використовую якісні живі олії, глини, лікарські рослини та мацерати, зібрані та зроблені власноруч, 100% ефірні олії, лише природні барвники.",
-                },
-                {
-                  label: "Природна унікальність",
-                  text: "У природі немає двох однакових листків чи квіток — так само кожна партія мого мила має свій неповторний мармуровий візерунок, свій характер і свій відтінок.",
-                },
-                {
-                  label: "Глибока справжність",
-                  text: "Наше життя перенасичене штучними замінниками — від їжі до емоцій. Справжнє мило повертає до тактильної та візуальної правди: воно чесне, адже дихає природою.",
-                },
-              ].map((item, i) => (
+              {T.why_manifesto_items.map((item, i) => (
                 <div key={i} className="flex gap-4 items-start">
                   <span className="shrink-0 mt-0.5 w-6 h-6 rounded-full bg-sage-600/15 text-sage-700 text-xs font-semibold flex items-center justify-center">
                     {i + 1}
@@ -82,40 +48,34 @@ export function WhyNatural() {
               ))}
             </div>
             <p className="text-stone-600 leading-relaxed mb-4 text-sm md:text-base">
-              Створення рецепта схоже на медитацію, де кожна олія, кожен компонент обирається не випадково, а для гармонії всього ансамблю. А далі починається довге очікування — від 6 тижнів до 6 місяців залежно від сорту, поки мило зріє та набирає сили.
+              {T.why_manifesto_p}
             </p>
             <p
               className="text-stone-700 leading-relaxed text-sm md:text-base"
               style={{ fontFamily: "var(--font-display)", fontStyle: "italic" }}
             >
-              Це мій маніфест любові та прийняття. Бережно очищаю шкіру — разом з цим змиваю чужі очікування, маски й стрес. Залишається лише я справжня, природна, красива у своїй унікальності. Кремова піна не пересушує, вона м'яко огортає й підкреслює природну текстуру, даруючи шкірі спокій і свободу дихати.
+              {T.why_manifesto_italic}
             </p>
           </div>
         </FadeIn>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {benefits.map((benefit, index) => (
-            <FadeIn key={index} delay={index * 100}>
-            <div
-              className="bg-white/85 rounded-xl p-8 hover:shadow-lg transition-shadow flex gap-5 items-start h-full"
-            >
-              <div className="shrink-0 w-14 h-14 rounded-full bg-white shadow-sm flex items-center justify-center">
-                <benefit.Icon
-                  className="w-7 h-7 text-sage-600"
-                  strokeWidth={1.5}
-                />
-              </div>
-              <div>
-                <h3 className="text-2xl mb-2 text-stone-800">
-                  {benefit.title}
-                </h3>
-                <p className="text-stone-600 leading-relaxed">
-                  {benefit.description}
-                </p>
-              </div>
-            </div>
-            </FadeIn>
-          ))}
+          {T.why_benefits.map((benefit, index) => {
+            const Icon = benefitIcons[index];
+            return (
+              <FadeIn key={index} delay={index * 100}>
+                <div className="bg-white/85 rounded-xl p-8 hover:shadow-lg transition-shadow flex gap-5 items-start h-full">
+                  <div className="shrink-0 w-14 h-14 rounded-full bg-white shadow-sm flex items-center justify-center">
+                    <Icon className="w-7 h-7 text-sage-600" strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl mb-2 text-stone-800">{benefit.title}</h3>
+                    <p className="text-stone-600 leading-relaxed">{benefit.description}</p>
+                  </div>
+                </div>
+              </FadeIn>
+            );
+          })}
         </div>
       </div>
     </section>

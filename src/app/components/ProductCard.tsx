@@ -4,6 +4,8 @@ import { FadeIn } from "./FadeIn";
 import { Sparkles, ArrowRight } from "lucide-react";
 import { SoapPlaceholder } from "./SoapPlaceholder";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { useLang } from "../i18n/LangContext";
+import { translations } from "../i18n/translations";
 
 interface ProductCardProps {
   product: Product;
@@ -12,8 +14,9 @@ interface ProductCardProps {
   onClick?: () => void;
 }
 
-function ProfileMini({ product }: { product: Product }) {
-  const { profile } = product;
+function ProfileMini({ profile }: { profile?: import("../data/products").SoapProfile }) {
+  const { lang } = useLang();
+  const T = translations[lang];
   if (!profile) return null;
   const { scent, lather, hardness, skinType } = profile;
 
@@ -22,7 +25,7 @@ function ProfileMini({ product }: { product: Product }) {
       {scent && (
         <div>
           <div className="text-[8px] uppercase tracking-wider text-stone-600 mb-0.5">
-            Аромат
+            {T.card_scent}
           </div>
           <p className="text-[10px] text-stone-600 leading-snug mb-1">
             {scent.label}
@@ -40,7 +43,7 @@ function ProfileMini({ product }: { product: Product }) {
       {lather && (
         <div>
           <div className="text-[8px] uppercase tracking-wider text-stone-600 mb-0.5">
-            Піна
+            {T.card_lather}
           </div>
           <p className="text-[10px] text-stone-600 leading-snug mb-1">
             {lather.label}
@@ -58,7 +61,7 @@ function ProfileMini({ product }: { product: Product }) {
       {hardness && (
         <div>
           <div className="text-[8px] uppercase tracking-wider text-stone-600 mb-0.5">
-            Твердість
+            {T.card_hardness}
           </div>
           <p className="text-[10px] text-stone-600 leading-snug mb-1">
             {hardness.label}
@@ -76,7 +79,7 @@ function ProfileMini({ product }: { product: Product }) {
       {skinType && (
         <div>
           <div className="text-[8px] uppercase tracking-wider text-stone-600 mb-1">
-            Для шкіри
+            {T.card_skintype}
           </div>
           <p className="text-[10px] text-stone-600 leading-snug">{skinType}</p>
         </div>
@@ -94,6 +97,14 @@ export function ProductCard({
   const isPremium = product.category === "premium";
   const isCuring = product.status === "curing";
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { lang } = useLang();
+  const T = translations[lang];
+  const name = lang === "en" ? (product.en?.name ?? product.name) : product.name;
+  const tagline = lang === "en" ? (product.en?.tagline ?? product.tagline) : product.tagline;
+  const benefits = lang === "en" ? (product.en?.benefits ?? product.benefits) : product.benefits;
+  const price = lang === "en" ? (product.price_en ?? product.price) : product.price;
+  const cureUntil = lang === "en" ? (product.cureUntil_en ?? product.cureUntil) : product.cureUntil;
+  const profile = lang === "en" ? (product.en?.profile ?? product.profile) : product.profile;
 
   const handleMouseEnter = () => {
     videoRef.current?.play().catch(() => {});
@@ -159,14 +170,14 @@ export function ProductCard({
               {isCuring ? (
                 <span className="inline-flex items-center gap-1.5 bg-stone-900/70 backdrop-blur-sm text-white px-2.5 py-1 rounded-full text-xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-300 animate-pulse" />
-                  {product.cureUntil
-                    ? `Дозріває до ${product.cureUntil}`
-                    : "Дозріває"}
+                  {cureUntil
+                    ? T.card_curing_until(cureUntil)
+                    : T.card_curing}
                 </span>
               ) : (
                 <span className="inline-flex items-center gap-1.5 bg-white/85 backdrop-blur-sm text-sage-800 px-2.5 py-1 rounded-full text-xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-sage-600" />
-                  Готове
+                  {T.card_ready}
                 </span>
               )}
             </div>
@@ -175,27 +186,27 @@ export function ProductCard({
 
         <div className="p-5">
           <div className="flex justify-between items-start mb-1">
-            <h3 className="text-xl text-stone-800">{product.name}</h3>
+            <h3 className="text-xl text-stone-800">{name}</h3>
             {loading ? (
               <span className="inline-block w-24 h-5 rounded bg-stone-200 animate-pulse shrink-0 ml-2" />
             ) : (
               <span className="text-lg text-sage-700 shrink-0 ml-2 animate-fade-in">
-                {product.price}
+                {price}
               </span>
             )}
           </div>
-          {product.tagline && (
+          {tagline && (
             <p
               className="text-sm text-stone-600 mb-3 leading-snug"
               style={{ fontFamily: "var(--font-display)", fontStyle: "italic" }}
             >
-              {product.tagline}
+              {tagline}
             </p>
           )}
 
-          {product.benefits && product.benefits.length > 0 && (
+          {benefits && benefits.length > 0 && (
             <div className="flex flex-wrap gap-1.5">
-              {product.benefits.slice(0, 3).map((b, i) => (
+              {benefits.slice(0, 3).map((b, i) => (
                 <span key={i} className="text-[10px] bg-stone-900/6 text-stone-700 px-2.5 py-1 rounded-full leading-none">
                   {b}
                 </span>
@@ -203,11 +214,11 @@ export function ProductCard({
             </div>
           )}
 
-          <ProfileMini product={product} />
+          <ProfileMini profile={profile} />
 
           <div className="mt-4 flex items-center justify-end gap-1.5 text-sage-500 group-hover:text-sage-700 transition-colors duration-300">
             <span className="text-[10px] tracking-[0.15em] uppercase font-semibold">
-              Детальніше
+              {T.card_details}
             </span>
             <ArrowRight className="w-3 h-3" />
           </div>

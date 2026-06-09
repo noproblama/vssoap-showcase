@@ -1,5 +1,7 @@
 import { SoapWaveBg2 } from "./DecorativeElements";
 import { FadeIn } from "./FadeIn";
+import { useLang } from "../i18n/LangContext";
+import { translations } from "../i18n/translations";
 
 function ViberIcon({ size = 22 }: { size?: number }) {
   return (
@@ -66,6 +68,9 @@ function InstagramIcon({ size = 22 }: { size?: number }) {
 }
 
 export function Contact() {
+  const { lang } = useLang();
+  const T = translations[lang];
+
   return (
     <section
       className="relative pt-20 pb-5 px-6 bg-stone-100 overflow-hidden"
@@ -78,19 +83,17 @@ export function Contact() {
       <div className="relative z-10 max-w-4xl mx-auto text-center">
         <FadeIn>
           <span className="block text-[10px] tracking-[0.25em] uppercase text-sage-600 font-semibold mb-3">
-            Замовлення
+            {T.contact_label}
           </span>
           <h2 className="text-4xl md:text-5xl mb-8 text-stone-800">
-            Як замовити
+            {T.contact_h2}
           </h2>
         </FadeIn>
 
         <FadeIn delay={100}>
         <div className="bg-white/85 rounded-3xl p-8 md:p-12 shadow-sm mb-12 border border-stone-100">
           <p className="text-lg text-stone-600 mb-10 leading-relaxed text-center max-w-2xl mx-auto">
-            Замовлення приймаю через соціальні мережі або месенджери.{" "}
-            <br className="hidden md:block" />
-            Доставка по всій Україні Новою Поштою або Укрпоштою.
+            {T.contact_body}
           </p>
 
           <div className="flex flex-col md:flex-row flex-wrap justify-center gap-4">
@@ -160,18 +163,13 @@ export function Contact() {
         </FadeIn>
 
         <FadeIn delay={200}>
-          <p className="text-stone-600">
-            Мінімальне замовлення — 2 бруски. При замовленні від 5 брусків —
-            знижка 10%
-          </p>
+          <p className="text-stone-600">{T.contact_discount}</p>
         </FadeIn>
       </div>
 
       <FadeIn delay={300}>
         <footer className="mt-16 text-center">
-          <p className="text-stone-500">
-            © 2026 VS Soap. Створено з любов'ю в Україні 🇺🇦
-          </p>
+          <p className="text-stone-500">{T.contact_footer}</p>
         </footer>
       </FadeIn>
     </section>

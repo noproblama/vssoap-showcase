@@ -1,32 +1,101 @@
 <!doctype html>
-<html lang="en">
+<html lang="uk">
     <head>
         <meta charset="UTF-8" />
         <link rel="icon" type="image/png" href="/favicon.png" />
+
+        <!-- ── Google Analytics 4 ────────────────────────────────────────
+             Replace G-XZ62V0ESKB with your real Measurement ID.
+             Find it in GA4 → Admin → Data Streams → your stream.
+        ─────────────────────────────────────────────────────────────── -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XZ62V0ESKB"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-XZ62V0ESKB');
+        </script>
+
+        <!-- ── Fonts ─────────────────────────────────────────────────── -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>VS soap — Натуральне крафтове мило ручної роботи</title>
-        <meta name="description" content="Крафтове мило ручної роботи з трав Черкащини. Холодне омилення, витримка від 6 тижнів, 100% натуральні інгредієнти." />
 
-        <!-- Open Graph / соцмережі та месенджери -->
+        <!-- ── Canonical & hreflang ──────────────────────────────────── -->
+        <link rel="canonical" href="https://vssoap.com/" />
+        <link rel="alternate" hreflang="uk" href="https://vssoap.com/?lang=uk" />
+        <link rel="alternate" hreflang="en" href="https://vssoap.com/?lang=en" />
+        <link rel="alternate" hreflang="x-default" href="https://vssoap.com/" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="ВелеСлава, VS Soap" />
+
+        <!-- ── Primary meta ──────────────────────────────────────────── -->
+        <title>VS Soap — Натуральне крафтове мило ручної роботи</title>
+        <meta name="description" content="Крафтове мило ручної роботи з трав Черкащини. Холодне омилення, витримка від 6 тижнів, 100% натуральні інгредієнти. Без SLS та парабенів." />
+        <meta name="keywords" content="крафтове мило, натуральне мило, мило ручної роботи, холодне омилення, мило Черкащина, VS Soap, натуральна косметика, мило без SLS" />
+
+        <!-- ── Open Graph ─────────────────────────────────────────────── -->
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="uk_UA" />
+        <meta property="og:locale:alternate" content="en_US" />
         <meta property="og:site_name" content="VS Soap" />
-        <meta property="og:url" content="https://noproblama.github.io/vssoap-showcase/" />
+        <meta property="og:url" content="https://vssoap.com/" />
         <meta property="og:title" content="VS Soap — Крафтове мило ручної роботи" />
-        <meta property="og:description" content="Створюю мило із власноруч зібраних трав. Холодне омилення, витримка від 6 тижнів, натуральні ефірні олії." />
-        <meta property="og:image" content="https://noproblama.github.io/vssoap-showcase/og-image.png" />
+        <meta property="og:description" content="Створюю мило із власноруч зібраних трав Черкащини. Холодне омилення, витримка від 6 тижнів, натуральні ефірні олії. Без SLS і парабенів." />
+        <meta property="og:image" content="https://vssoap.com/og-image.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="VS Soap — крафтове мило ручної роботи з Черкащини" />
 
-        <!-- Twitter / X -->
+        <!-- ── Twitter / X ────────────────────────────────────────────── -->
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="VS Soap — Крафтове мило ручної роботи" />
-        <meta name="twitter:description" content="Створюю мило із власноруч зібраних трав. Холодне омилення, витримка від 6 тижнів, натуральні ефірні олії." />
-        <meta name="twitter:image" content="https://noproblama.github.io/vssoap-showcase/og-image.png" />
+        <meta name="twitter:description" content="Створюю мило із власноруч зібраних трав Черкащини. Холодне омилення, витримка від 6 тижнів." />
+        <meta name="twitter:image" content="https://vssoap.com/og-image.png" />
+
+        <!-- ── Structured data (JSON-LD) ──────────────────────────────── -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Store",
+          "name": "VS Soap",
+          "description": "Крафтове мило ручної роботи з трав Черкащини. Холодне омилення, витримка від 6 тижнів до 6 місяців. Без SLS, парабенів та синтетичних барвників.",
+          "url": "https://vssoap.com",
+          "image": "https://vssoap.com/og-image.png",
+          "telephone": "+380966087578",
+          "priceRange": "130–500 грн",
+          "currenciesAccepted": "UAH",
+          "paymentAccepted": "Cash, Bank Transfer",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "UA",
+            "addressRegion": "Черкаська область"
+          },
+          "sameAs": [
+            "https://www.instagram.com/_vele_slava/",
+            "https://www.facebook.com/t.dominichenko"
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Крафтове мило VS Soap",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Дитяче мило" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Алепське мило" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Екзотичне мило" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Лавандове мило" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Медове мило" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Полинове мило" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Солянка" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Рожеве мило" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Квіткове мило" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Полунично-ароматне мило" } }
+            ]
+          }
+        }
+        </script>
+
         <style>
             html,
             body {

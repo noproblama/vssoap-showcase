@@ -32,10 +32,25 @@ export interface Product {
   profile?: SoapProfile;
   keyIngredients?: KeyIngredient[];
   masterNote?: string;
+  // ── English content ──
+  en?: {
+    name?: string;
+    tagline?: string;
+    description?: string;
+    masterNote?: string;
+    detailedDescription?: string;
+    benefits?: string[];
+    ingredients?: string[];
+    keyIngredients?: KeyIngredient[];
+    profile?: SoapProfile;
+  };
   // ── dynamic fields (overridden from Google Sheets at runtime) ──
   status?: "ready" | "curing";
-  cureUntil?: string; // human-readable, e.g. "серпня 2026"
-  stockNote?: string; // e.g. "лишилось 4 бруски"
+  cureUntil?: string;
+  cureUntil_en?: string;
+  stockNote?: string;
+  stockNote_en?: string;
+  price_en?: string;
 }
 
 // ─── Static product catalogue ─────────────────────────────────────────────────
@@ -90,6 +105,42 @@ export const products: Product[] = [
       "Ідеально для чутливої та дитячої шкіри",
       "Мʼяке очищення, натуральний гліцерин",
     ],
+    en: {
+      name: "Baby",
+      tagline: "the gentlest possible",
+      description: "Classic Castile soap based on olive oil. Exceptionally mild — perfect for dry, sensitive and baby skin.",
+      masterNote: "The first recipe I remake every year. Chamomile soothes, lavender binds — not for the label, but genuinely. I hold myself to one standard: skin should feel soft afterwards, even the most delicate, like before sleep.",
+      detailedDescription: "This soap is best described as a classic, enriched Castile bar. Thanks to its high olive oil content it is exceptionally gentle — ideal for dry, sensitive or baby skin.\n\n## How it works\nThis soap is a «delicate conditioner». Olive oil keeps aggressiveness very low, does not dry the skin, and leaves a feeling of softness and moisture. CO₂ chamomile extract amplifies the soothing effect — chamomile has anti-inflammatory properties, and together with lavender makes this soap wonderful for calming irritation.\n\nCastor oil makes the lather more stable and bubbly. Coconut oil provides sufficient cleansing without disrupting the skin's lipid barrier. Sodium citrate softens water and helps the soap lather better in hard water. 100% lavender essential oil has an aromatherapeutic effect and mild antiseptic properties.\n\n## Care tips\nDue to the high olive content, use a soap dish with good drainage or a soap bag — the bar will last considerably longer.",
+      benefits: [
+        "Soothing and anti-inflammatory",
+        "Antibacterial and antiseptic",
+        "Regenerates and moisturises",
+        "Nourishes without drying",
+        "Ideal for sensitive and baby skin",
+        "Gentle cleansing with natural glycerin",
+      ],
+      ingredients: [
+        "Olive oil",
+        "Coconut oil",
+        "Castor oil",
+        "Sodium citrate",
+        "Sodium hydroxide (fully neutralised)",
+        "CO₂ chamomile extract",
+        "100% lavender essential oil",
+      ],
+      keyIngredients: [
+        { name: "Olive oil", role: "softness", tone: "sage" },
+        { name: "Chamomile extract", role: "soothing", tone: "honey" },
+        { name: "Lavender essential oil", role: "aromatherapy", tone: "sage" },
+        { name: "Castor oil", role: "lather", tone: "neutral" },
+      ],
+      profile: {
+        scent: { label: "Soft lavender", intensity: 2 },
+        lather: { label: "Creamy, fine", strength: 3 },
+        hardness: { label: "Soft", level: 2 },
+        skinType: "Baby · dry · sensitive",
+      },
+    },
     status: "ready",
   },
 
@@ -137,6 +188,40 @@ export const products: Product[] = [
       "Можна використовувати як шампунь (при лупі)",
       "Живить шкіру вітамінами А та Е",
     ],
+    en: {
+      name: "Aleppo",
+      tagline: "therapeutic",
+      description: "One of the oldest soaps in the world. Olive and bay laurel oils, bay leaf decoction and essential oil. A true therapeutic product.",
+      masterNote: "Bay laurel oil — 25% of the weight, and not for show. It defines everything this soap does: antiseptic, therapeutic, that characteristic scent. I wait for it to cure from six months to two years — and every bar comes out with a green core, just like the original Syrian recipe.",
+      detailedDescription: "Aleppo soap is considered one of the oldest soaps in the world. Its uniqueness lies in combining base olive oil with the healing bay laurel oil. Bay leaf decoction, laurel oil (25%) and laurel essential oil make this product a true therapeutic agent.\n\n## How it works\nThe soap effectively cleanses pores without disturbing the natural hydrolipid balance. It produces a gentle, creamy, fine-bubbled lather. The characteristic spicy, slightly bitter, herbaceous-woody aroma is deepened by 100% bay laurel essential oil.\n\nOlive oil provides softness and moisture, nourishing with vitamins A and E. Bay leaf decoction adds tannins, tones the skin and soothes irritation.\n\n## Colour and curing\nColour ranges from dark olive to brownish-green; as it cures, the outer layer turns golden-beige while leaving a rich green core.\n\nThe soap requires long curing — from 6–9 months up to 1–2 years, after which it becomes maximally gentle on the skin and hard in use.\n\n## Care tips\nDue to the high olive content, use a soap dish with good drainage or a soap bag.",
+      benefits: [
+        "Antiseptic and anti-inflammatory",
+        "Helps with acne and dermatitis",
+        "Effective for eczema and psoriasis",
+        "Gently cleanses pores without disrupting the hydrolipid balance",
+        "Can be used as a shampoo (for dandruff)",
+        "Nourishes skin with vitamins A and E",
+      ],
+      ingredients: [
+        "Olive oil",
+        "Bay laurel oil (25%)",
+        "Bay leaf decoction",
+        "100% bay laurel essential oil",
+        "Sodium hydroxide (fully neutralised)",
+      ],
+      keyIngredients: [
+        { name: "Olive oil", role: "base", tone: "sage" },
+        { name: "Bay laurel oil 25%", role: "therapy", tone: "sage" },
+        { name: "Bay leaf decoction", role: "toning", tone: "sage" },
+        { name: "Bay laurel essential oil", role: "scent", tone: "honey" },
+      ],
+      profile: {
+        scent: { label: "Bay laurel forest", intensity: 4 },
+        lather: { label: "Creamy, fine", strength: 3 },
+        hardness: { label: "Hard", level: 4 },
+        skinType: "Problematic · oily · with dermatoses",
+      },
+    },
     status: "curing",
     cureUntil: "серпня 2026",
   },
@@ -188,6 +273,43 @@ export const products: Product[] = [
       "Ароматерапія: знімає напругу, покращує настрій",
       "Підходить для комбінованої, стомленої та вікової шкіри",
     ],
+    en: {
+      name: "Exotic",
+      tagline: "after a hard week",
+      description: "A reset for body and spirit. Five base oils and three healing oils, blue clay, an aromatic blend of orange, ylang-ylang and patchouli.",
+      masterNote: "I made this for myself — after a particularly hard week. Patchouli and ylang-ylang don't just add fragrance, they literally switch you over. And blue clay draws out everything that accumulated during the week — from your pores and your mind.",
+      detailedDescription: "«Exotic» handcrafted natural soap — a reset for body and spirit. In the modern world, energy is the most precious resource, and Exotic is your daily investment in yourself.\n\n## How it works\nFive base oils (olive, coconut, palm, castor, cocoa) — the ideal combination for deep hydration and nourishment: they make skin elastic and radiant.\n\nThree healing oils (sea buckthorn, apricot kernel, wheat germ) act as a powerful antioxidant cocktail, protecting cells from stress and supporting youthful skin.\n\nBlue clay gently exfoliates, draws out toxins and improves skin tone. Lemon and lactic acids provide a conditioning effect and pleasant texture.\n\n## Scent and mood\nThe unique aromatic blend of orange, ylang-ylang and patchouli instantly relieves tension and lifts the mood. Suitable for daily cleansing and restorative care for face and body.",
+      benefits: [
+        "Antioxidant protection and cell renewal",
+        "Gentle exfoliation and detox (blue clay)",
+        "Stimulates regeneration without aggressive friction",
+        "Conditioning effect, silky texture",
+        "Aromatherapy: relieves tension, lifts mood",
+        "Suitable for combination, fatigued and mature skin",
+      ],
+      ingredients: [
+        "Olive, coconut, palm oils",
+        "Castor oil, cocoa butter",
+        "Sea buckthorn oil",
+        "Wheat germ oil",
+        "Apricot kernel oil",
+        "Blue clay",
+        "Lemon and lactic acids",
+        "100% essential oils of orange, ylang-ylang, patchouli",
+      ],
+      keyIngredients: [
+        { name: "5 base oils + cocoa butter", role: "nourishment", tone: "honey" },
+        { name: "Sea buckthorn oil", role: "antioxidant", tone: "honey" },
+        { name: "Blue clay", role: "detox", tone: "clay" },
+        { name: "Ylang-ylang, patchouli", role: "aromatherapy", tone: "rose" },
+      ],
+      profile: {
+        scent: { label: "Citrus amber", intensity: 4 },
+        lather: { label: "Rich creamy", strength: 4 },
+        hardness: { label: "Medium", level: 3 },
+        skinType: "Combination · fatigued · mature",
+      },
+    },
     status: "ready",
   },
 
@@ -239,6 +361,44 @@ export const products: Product[] = [
       "Зволожує та живить, шкіра оксамитова на дотик",
       "Підходить для всіх типів шкіри",
     ],
+    en: {
+      name: "Lavender",
+      tagline: "for a better night's sleep",
+      description: "Soothes and relaxes. Shea butter, pistachio oil, lavender flower decoction, blue clay and 100% lavender essential oil.",
+      masterNote: "Pistachio oil is the little secret here: it's what makes the lather so velvety rather than just creamy. Shea butter and the flower decoction do the rest. I made it first after a sleepless night — since then every batch finds whoever needs a quiet hour most.",
+      detailedDescription: "Natural handcrafted soap made by cold process. The combination of coconut, olive and palm oils provides ideal lather and delicate cleansing.\n\n## How it works\nShea butter (karite) deeply nourishes; pistachio oil and apricot kernel oil make the soap's texture incredibly gentle, leaving skin velvety to the touch.\n\nBlue clay — a natural mineral that gently draws out toxins, delicately exfoliates and evens skin tone, giving the soap its noble natural hue.\n\nLactic and lemon acids make the soap «silky», soften water and prevent skin dryness.\n\n## Scent and ritual\nA rich lavender flower decoction combined with 100% natural essential oil bestows a calming aroma with antiseptic properties: helps relieve stress and promote relaxation, improves sleep, reduces fatigue and lifts mood. The scent is herbaceous, fresh, with distinct notes of blooming lavender.\n\n## Care tips\nTo extend the life of natural soap, store on a soap dish with drainage holes or in a soap bag.",
+      benefits: [
+        "Soothing and relaxing",
+        "Gentle detox (blue clay)",
+        "Delicate exfoliation and tone-evening",
+        "Aromatherapy: relieves stress, improves sleep",
+        "Hydrates and nourishes, skin velvety to the touch",
+        "Suitable for all skin types",
+      ],
+      ingredients: [
+        "Coconut, olive, palm oils",
+        "Shea butter (karite)",
+        "Pistachio oil",
+        "Apricot kernel oil",
+        "Lavender flower decoction",
+        "Blue clay",
+        "Lemon and lactic acids",
+        "100% lavender essential oil",
+      ],
+      keyIngredients: [
+        { name: "Shea butter (karite)", role: "nourishment", tone: "honey" },
+        { name: "Pistachio oil", role: "silkiness", tone: "sage" },
+        { name: "Lavender flower decoction", role: "soothing", tone: "sage" },
+        { name: "Blue clay", role: "detox", tone: "clay" },
+        { name: "Lavender essential oil", role: "aromatherapy", tone: "sage" },
+      ],
+      profile: {
+        scent: { label: "Blooming lavender", intensity: 4 },
+        lather: { label: "Silky creamy", strength: 4 },
+        hardness: { label: "Medium", level: 3 },
+        skinType: "All types · stressed",
+      },
+    },
     status: "ready",
   },
 
@@ -294,6 +454,44 @@ export const products: Product[] = [
       "Потужна антиоксидантна та загоювальна дія (обліпиха)",
       "Ароматерапія: тонізує та заспокоює (апельсин, ладан)",
     ],
+    en: {
+      name: "Honey",
+      tagline: "skin's winter saviour",
+      description: "Gentle care with natural honey and beeswax. Sea buckthorn and sweet almond oils, essential oils of orange and frankincense — nourishment, hydration and aromatherapy.",
+      masterNote: "Honey here is not just fragrance — it genuinely holds moisture in the skin. And beeswax creates a protective veil that saves you from winter without clogging pores. I made it first for a friend — her hands were cracking, and she never went back to pharmacy creams.",
+      detailedDescription: "Gentle care, gifted by nature itself. «Honey» has a rich nourishing superfat — part of the most precious oils did not react with the lye and remain in the soap in pure form, working directly for the benefit of your skin.\n\n## How it works\nNatural honey is a natural humectant that attracts and retains moisture in the skin, making it incredibly soft and elastic.\n\nBeeswax creates a breathable veil on the skin that protects from drying, wind and hard water.\n\nSea buckthorn oil — true «liquid gold» for the skin, has powerful healing action, improves the colour of face and body. Sweet almond oil eliminates flaking and dryness, restoring skin tone.\n\nLemon and lactic acids make the lather incredibly creamy and soften water. Orange essential oil lifts mood and tones the skin. Frankincense essential oil — with an anti-ageing effect, smoothes and soothes the skin, bringing a feeling of harmony and calm.\n\n## Who benefits most\nBecomes a true saviour for dry, dehydrated and sensitive skin needing vitamin nourishment — especially in autumn and winter.",
+      benefits: [
+        "Delicate cleansing and deep nourishment",
+        "Hydration and moisture retention (natural honey)",
+        "Regeneration and cell renewal",
+        "Protection from drying and wind (beeswax)",
+        "Powerful antioxidant and healing action (sea buckthorn)",
+        "Aromatherapy: tones and soothes (orange, frankincense)",
+      ],
+      ingredients: [
+        "Olive, coconut, palm, castor oils",
+        "Cocoa butter",
+        "Sea buckthorn oil",
+        "Sweet almond oil",
+        "Natural honey",
+        "Beeswax",
+        "Lactic and lemon acids",
+        "100% essential oils of orange and frankincense",
+      ],
+      keyIngredients: [
+        { name: "Natural honey", role: "hydration", tone: "honey" },
+        { name: "Beeswax", role: "protection", tone: "honey" },
+        { name: "Sea buckthorn oil", role: "regeneration", tone: "honey" },
+        { name: "Sweet almond oil", role: "softness", tone: "neutral" },
+        { name: "Orange & frankincense oils", role: "aromatherapy", tone: "rose" },
+      ],
+      profile: {
+        scent: { label: "Warm amber (orange, frankincense)", intensity: 3 },
+        lather: { label: "Creamy", strength: 4 },
+        hardness: { label: "Medium", level: 3 },
+        skinType: "Dry · dehydrated · sensitive",
+      },
+    },
     status: "ready",
   },
 
@@ -344,6 +542,43 @@ export const products: Product[] = [
       "Відновлення здорового кольору обличчя та тіла",
       "Ароматерапія: знімає стрес та ментальне перевантаження",
     ],
+    en: {
+      name: "Wormwood",
+      tagline: "when your skin asks for real cleansing",
+      description: "A herbal detox cocoon for the body. Wormwood, sage and tansy with emerald and pink clays — deep cleansing, renewal and antibacterial protection.",
+      masterNote: "Two clays — emerald and pink — so that deep cleansing is never harsh. Three bitter herbs — so it truly detoxes. A risky combination, but that sharp, steppe aroma is why the same order comes back for the third time in a row.",
+      detailedDescription: "Natural craft soap made from scratch by cold process — a «herbal detox cocoon»: strong enough to cleanse, yet gentle enough to restore the skin's barrier function.\n\n## The herbal trio\n**Wormwood** — the king of detox, reduces inflammation, fights bacteria and gives an unmistakable steppe aroma.\n\n**Sage** (in decoction and macerate) — a natural antioxidant; the macerate preserves the plant's volatile compounds, which help heal micro-tears and reduce inflammation.\n\n**Tansy** has strong anti-inflammatory and toning properties, soothes irritated skin.\n\n## Clays and oils\n**Emerald clay** literally «draws» impurities from pores, stimulates circulation and saturates the skin with minerals. **Pink clay** acts gently — ideal for fine skin prone to redness, giving a healthy glow.\n\nFlaxseed oil, rich in Omega-3, intensively restores the skin barrier. Almond oil softens the skin, making it velvety to the touch.\n\n## Scent and ritual\nEssential oils of wormwood and sage create a cool, bittersweet-fresh scent that helps gather thoughts and relieve stress. Ylang-ylang adds a light floral note and is known for its antidepressant properties.",
+      benefits: [
+        "Deep cleansing and detox (emerald clay)",
+        "Anti-inflammatory and antibacterial",
+        "Helps with breakouts and inflammation",
+        "Heals micro-tears (sage, flaxseed oil)",
+        "Restores healthy skin colour",
+        "Aromatherapy: relieves stress and mental overload",
+      ],
+      ingredients: [
+        "Coconut, olive, palm oils, shea butter",
+        "Flaxseed and almond oils",
+        "Sage decoction and macerate",
+        "Wormwood, tansy",
+        "Emerald and pink clays",
+        "Lemon and lactic acids",
+        "100% essential oils of wormwood, sage, ylang-ylang",
+      ],
+      keyIngredients: [
+        { name: "Wormwood", role: "detox", tone: "sage" },
+        { name: "Sage (macerate)", role: "healing", tone: "sage" },
+        { name: "Tansy", role: "toning", tone: "sage" },
+        { name: "Emerald + pink clays", role: "cleansing", tone: "clay" },
+        { name: "Flaxseed oil (Omega-3)", role: "renewal", tone: "honey" },
+      ],
+      profile: {
+        scent: { label: "Mountain wormwood", intensity: 5 },
+        lather: { label: "Rich creamy", strength: 4 },
+        hardness: { label: "Hard", level: 4 },
+        skinType: "Problematic · oily · combination",
+      },
+    },
     status: "ready",
   },
 
@@ -389,6 +624,39 @@ export const products: Product[] = [
       "Живлення та захист від пересушування (абрикосова олія)",
       "Ароматерапія: знімає втому, освіжає думки",
     ],
+    en: {
+      name: "Salt",
+      tagline: "when you need to wake up",
+      description: "SPA effect in every bar. Sea salt, apricot kernel oil and essential oils of eucalyptus, rosemary and frankincense — detox, toning and deep cleansing.",
+      masterNote: "Fine-ground sea salt — a real mineral scrub, but a gentle one. Eucalyptus and rosemary literally wake up with you. I reach for this one on Mondays; the floral one I save for Fridays.",
+      detailedDescription: "Handcrafted from scratch by cold process, Salt soap creates a thick, dense and silky creamy lather that gently cleanses and gives the skin a feeling of absolute freshness and tone — like bathing in the sea.\n\n## SPA effect and aromatherapy\nThe composition of 100% essential oils of eucalyptus, rosemary and frankincense creates a deep, clean, resinous-spicy scent with a light cool note. This blend tones, relieves fatigue, refreshes the mind and helps relax after a hard day.\n\n## Deep cleansing and detox\nFine sea salt works as a gentle mineral scrub — delicately exfoliates dead cells, draws out toxins, cleanses and tightens pores, and stimulates skin renewal.\n\n## Gentle care\nApricot kernel oil in the superfat does not saponify and remains in the soap in pure form, deeply nourishing and protecting the skin from drying.\n\n## Antiseptic balance\n100% essential oils of rosemary and eucalyptus have powerful anti-inflammatory and antibacterial properties, and help normalise sebaceous gland activity.",
+      benefits: [
+        "Deep cleansing and detox (sea salt)",
+        "Gentle mineral scrub, tightened pores",
+        "Sebum regulation and antiseptic action",
+        "Toning and SPA effect",
+        "Nourishment and protection from drying (apricot oil)",
+        "Aromatherapy: relieves fatigue, refreshes the mind",
+      ],
+      ingredients: [
+        "Olive, coconut, palm, castor oils",
+        "Apricot kernel oil",
+        "Sea salt",
+        "100% essential oils of eucalyptus, rosemary and frankincense",
+      ],
+      keyIngredients: [
+        { name: "Sea salt", role: "scrub", tone: "clay" },
+        { name: "Apricot oil (superfat)", role: "nourishment", tone: "honey" },
+        { name: "Eucalyptus essential oil", role: "toning", tone: "sage" },
+        { name: "Rosemary essential oil", role: "antiseptic", tone: "sage" },
+      ],
+      profile: {
+        scent: { label: "Sea breeze (eucalyptus, rosemary)", intensity: 4 },
+        lather: { label: "Dense silky", strength: 5 },
+        hardness: { label: "Very hard", level: 5 },
+        skinType: "Oily · combination · acne-prone",
+      },
+    },
     status: "ready",
   },
 
@@ -436,6 +704,40 @@ export const products: Product[] = [
       "Ароматерапія: гармонізує, знімає напругу",
       "Підходить для всіх типів, особливо для сухої та зрілої",
     ],
+    en: {
+      name: "Rose",
+      tagline: "for special moments",
+      description: "A delicate beauty ritual with the scent of rose. Rose macerate and 100% rose essential oil, pink clay — hydration, toning and anti-ageing care.",
+      masterNote: "Rose essential oil is the most expensive in the workshop, and there's no substitute. But it's not only about that: rose petal macerate in olive oil and pink clay provide real care, not just a beautiful scent.",
+      detailedDescription: "«Rose» soap is made entirely from plant oils using the traditional cold process. It cured for over 6 weeks to preserve all the benefits and power of the natural components. It has a silky, creamy lather that delicately cleanses without leaving a feeling of tightness or dryness.\n\n## How it works\nRose macerate — a unique infusion of rose petals in olive oil — saturates the soap with antioxidants, soothes irritation and improves skin elasticity.\n\nPink clay delicately exfoliates, cleanses pores, evens skin tone and gives the soap its gentle natural pastel hue.\n\nLactic acid forms sodium lactate — a powerful natural humectant that makes the soap even softer and the skin velvety.\n\nOlive, coconut and palm oils create the ideal balance: deep hydration, nourishment and a lasting, rich lather. Castor oil adds special tenderness and a creamy texture to the lather.\n\n## Scent and ritual\nRose essential oil wraps in a fine, noble fragrance that harmonises the emotional state, relieves tension and brings a sense of inner calm.",
+      benefits: [
+        "Deep hydration and anti-ageing care",
+        "Toning and tone-evening (pink clay)",
+        "Delicate exfoliation and pore cleansing",
+        "Restores skin elasticity (rose macerate)",
+        "Aromatherapy: harmonises, relieves tension",
+        "Suitable for all types, especially dry and mature",
+      ],
+      ingredients: [
+        "Olive, coconut, palm, castor oils",
+        "Rose macerate",
+        "Pink clay",
+        "Lactic acid",
+        "100% rose essential oil",
+      ],
+      keyIngredients: [
+        { name: "Rose macerate", role: "renewal", tone: "rose" },
+        { name: "Pink clay", role: "toning", tone: "rose" },
+        { name: "Lactic acid", role: "hydration", tone: "neutral" },
+        { name: "Rose essential oil", role: "aromatherapy", tone: "rose" },
+      ],
+      profile: {
+        scent: { label: "Tea rose", intensity: 4 },
+        lather: { label: "Silky creamy", strength: 4 },
+        hardness: { label: "Medium", level: 3 },
+        skinType: "All types · dry · mature",
+      },
+    },
     status: "ready",
   },
 
@@ -484,6 +786,41 @@ export const products: Product[] = [
       "Ароматерапія: вишуканий квітковий аромат",
       "Підходить для щоденного догляду за тілом та обличчям",
     ],
+    en: {
+      name: "Floral",
+      tagline: "a morning that begins with a ritual",
+      description: "An exquisite floral soap for a daily ritual. Sea buckthorn and apricot oils, emerald clay, essential oils of narcissus and frangipani — nourishment and a healthy glow.",
+      masterNote: "Sea buckthorn and apricot in the superfat — they didn't saponify; they stayed in the soap as an active cream for the skin. The scent of narcissus and frangipani is the one blend where I never spare a gram, because a morning ritual deserves a genuine fragrance.",
+      detailedDescription: "«Floral» natural soap — true luxury care from plant oils and natural ingredients. The base formula of olive, coconut, palm and castor oils creates a thick, creamy and incredibly gentle lather that softly cleanses without drying the skin.\n\n## How it works\nApricot kernel and sea buckthorn oils (superfat) — intensively nourish, soften, saturate the skin with vitamins and bestow a healthy, gentle glow. Added at the end of the process, they did not react with the lye and work as an active cream.\n\nEmerald clay gently detoxes, tones and delicately evens skin texture.\n\nLemon and lactic acids give the soap a conditioning effect, making skin smooth and silky.\n\n## Scent and ritual\n100% essential oils of narcissus and frangipani create an exquisite, deep floral scent that turns a simple wash into a refined aromatherapy ritual.\n\n## How it is made\nCold process and long curing (over 6 weeks) preserve the maximum benefit of the natural components. No synthetic dyes, artificial fragrances, parabens or aggressive surfactants.",
+      benefits: [
+        "Deep nourishment and hydration (sea buckthorn, apricot)",
+        "Gentle detox and toning (emerald clay)",
+        "Conditioning effect, silky texture",
+        "Restores healthy skin glow",
+        "Aromatherapy: exquisite floral scent",
+        "Suitable for daily face and body care",
+      ],
+      ingredients: [
+        "Olive, coconut, palm, castor oils",
+        "Apricot kernel oil",
+        "Sea buckthorn oil",
+        "Emerald clay",
+        "Lemon and lactic acids",
+        "100% essential oils of narcissus and frangipani",
+      ],
+      keyIngredients: [
+        { name: "Sea buckthorn oil (superfat)", role: "nourishment", tone: "honey" },
+        { name: "Apricot oil (superfat)", role: "softness", tone: "honey" },
+        { name: "Emerald clay", role: "toning", tone: "clay" },
+        { name: "Narcissus & frangipani oils", role: "scent", tone: "rose" },
+      ],
+      profile: {
+        scent: { label: "Blooming garden (narcissus, frangipani)", intensity: 5 },
+        lather: { label: "Rich creamy", strength: 4 },
+        hardness: { label: "Medium", level: 3 },
+        skinType: "All types · normal",
+      },
+    },
     status: "ready",
   },
 
@@ -533,6 +870,42 @@ export const products: Product[] = [
       "Підходить для всіх типів шкіри",
       "Чарівний фруктовий аромат",
     ],
+    en: {
+      name: "Strawberry",
+      tagline: "summer in your hands, always",
+      description: "Gentle scrub soap with plantain. Emerald clay, plantain leaf powder, apricot and grapeseed oils — cleansing, exfoliation and nourishment.",
+      masterNote: "Plantain flour is the gentlest scrub I know: it doesn't scratch, but it really does exfoliate. Emerald clay does the rest. The strawberry scent — and suddenly it's not Saturday at home, it's real summer. I throw it in my bag and take it everywhere.",
+      detailedDescription: "«Strawberry with Plantain» soap — a balanced combination of delicate cleansing and active care, made from scratch by cold process.\n\n## How it works\nThick, creamy lather thanks to coconut, palm and castor oils — olive oil provides gentleness.\n\nEmerald clay gently cleanses pores, while plantain leaf powder acts as an ultra-soft natural scrub, stimulating skin renewal.\n\nApricot and grapeseed oils (superfat) were added at the end of the process — they did not react with the lye and work as an active cream: moisturise, restore elasticity and suppleness.\n\nLemon and lactic acids form sodium citrate and sodium lactate, soften hard water and give the soap a conditioning effect.\n\n## Scent and ritual\nThe strawberry fragrance brings a magical fruity mood; patchouli essential oil adds depth and an earthy note.\n\n## Care tips\nSuitable for all skin types — emerald clay and plantain cleanse combination and oily skin perfectly, while the superfat protects dry and sensitive from drying.",
+      benefits: [
+        "Gentle cleansing, thick creamy lather",
+        "Detox and exfoliation (emerald clay, plantain)",
+        "Intensive nourishment via superfat (apricot, grapeseed)",
+        "Silky, conditioning effect (acids)",
+        "Suitable for all skin types",
+        "Magical fruity fragrance",
+      ],
+      ingredients: [
+        "Coconut, olive, palm, castor oils",
+        "Apricot kernel oil",
+        "Grapeseed oil",
+        "Emerald clay",
+        "Plantain leaf powder",
+        "Lemon and lactic acids",
+        "Strawberry fragrance, 100% patchouli essential oil",
+      ],
+      keyIngredients: [
+        { name: "Plantain leaf powder", role: "scrub", tone: "sage" },
+        { name: "Emerald clay", role: "cleansing", tone: "clay" },
+        { name: "Apricot oil (superfat)", role: "nourishment", tone: "honey" },
+        { name: "Grapeseed oil", role: "elasticity", tone: "sage" },
+      ],
+      profile: {
+        scent: { label: "Summer strawberry", intensity: 4 },
+        lather: { label: "Rich creamy", strength: 4 },
+        hardness: { label: "Medium", level: 3 },
+        skinType: "All types · combination",
+      },
+    },
     status: "ready",
   },
 
@@ -563,6 +936,20 @@ export const products: Product[] = [
       "Економія до 15% порівняно з поштучною купівлею",
       "Індивідуальний підбір складу",
     ],
+    en: {
+      name: "Gift Sets",
+      tagline: "for someone special",
+      description: "Tasting sets or gift collections. Assembled by hand for every order.",
+      masterNote: "I assemble each one by hand per order — tell me who it's for and what mood, and I'll find the right balance of bars.",
+      detailedDescription: "Specially curated combinations of my soaps in beautiful eco-friendly packaging. The perfect gift for your loved ones. Available as tasting sets (mini bars, 4–6 varieties) and full gift collections. Individual composition can be customised.",
+      benefits: [
+        "Ready-made gift",
+        "Beautiful packaging",
+        "A chance to try different varieties",
+        "Save up to 15% compared to buying individually",
+        "Custom composition",
+      ],
+    },
     status: "ready",
   },
 ];

@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { Play, X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 import { FadeIn } from "./FadeIn";
+import { BotanicalPatternBg } from "./DecorativeElements";
+import { asset } from "../lib/asset";
+import { useLang } from "../i18n/LangContext";
+import { translations } from "../i18n/translations";
 
 function QuoteMark() {
   return (
@@ -9,27 +13,31 @@ function QuoteMark() {
     </span>
   );
 }
-import { BotanicalPatternBg } from "./DecorativeElements";
-import { asset } from "../lib/asset";
 
 const testimonials = [
   {
     name: "Миролада",
+    name_en: "Myrolada",
     text: "Це дійсно живі мила, в яких відчувається енергія і сила! Всі композиції підібрані так, що вони працюють під різні запити. Найголовніше — шкіра після використання не стягнена, не суха, а шовковиста, ніжна, жива. Відчула вплив не лише фізично — і на психічний, і на ментальний стан. Сміливо рекомендую!",
+    text_en: "These are truly living soaps — you feel the energy and strength in them! Every blend is so well matched that each one works for a different need. Most importantly — skin after use isn't tight or dry, it's silky, tender, alive. I felt the effect not only physically, but on my emotional and mental state too. Highly recommend!",
     rating: 5,
     photo: asset("review_1.webp"),
     videoUrl: asset("review_1.mp4"),
   },
   {
     name: "Ольга К.",
+    name_en: "Olha K.",
     text: "Подарунковий набір із 10 видів мила у вʼязаній корзинці ручної роботи — все дуже гарно, класна корзинка. Подарунок — супер!",
+    text_en: "A gift set of 10 soap varieties in a handmade knitted basket — everything is gorgeous, lovely basket. As a gift — perfect!",
     rating: 5,
     photo: asset("review_2.webp"),
     videoUrl: asset("review_2.mp4"),
   },
   {
     name: "Торі М.",
+    name_en: "Tori M.",
     text: "Дуже дякую за ваше крафтове милко 💗\n\n🔥 Мило не сушить шкіру. В мене чутлива шкіра, від мила з магазину я вся чухаюсь, шкіра стягується так, що наче зараз потріскається. Після Лавандового та Огіркового — повністю комфортно! Для інтимної гігієни теж підійшло, що дивовижно!\n\n💚 Аромат приємний, ненав'язливий, природній — не залишається на шкірі, що говорить про відсутність хімічних закріплювачів і добавок.\n\nЯ створюю натуральні креми, розбираюсь у складі — і тепер буду обирати ваше мило. Закупилась на півроку 🥰",
+    text_en: "Thank you so much for your craft soap 💗\n\n🔥 The soap doesn't dry my skin. I have sensitive skin — store-bought soap makes me itch all over, my skin gets so tight it feels like it will crack. After the Lavender and Cucumber bars — completely comfortable! Even worked for intimate hygiene, which is amazing!\n\n💚 The scent is pleasant, unobtrusive, natural — it doesn't linger on the skin, which means there are no chemical fixatives or additives.\n\nI make natural creams myself and know my ingredients — and from now on I'll be choosing your soap. Stocked up for half a year 🥰",
     rating: 5,
     photo: asset("review_3.webp"),
     videoUrl: asset("review_3.mp4"),
@@ -55,6 +63,9 @@ function VideoModal({
   text?: string;
   onClose: () => void;
 }) {
+  const { lang } = useLang();
+  const T = translations[lang];
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -79,10 +90,10 @@ function VideoModal({
         <button
           className="absolute -top-10 right-0 flex items-center gap-1.5 text-white/80 hover:text-white transition-colors text-sm"
           onClick={onClose}
-          aria-label="Закрити відео"
+          aria-label={T.testimonials_close_video_aria}
         >
           <X className="w-5 h-5" />
-          <span>Закрити</span>
+          <span>{T.testimonials_close}</span>
         </button>
 
         {/* Video */}
@@ -132,6 +143,8 @@ function SocialModal({
   startIndex: number;
   onClose: () => void;
 }) {
+  const { lang } = useLang();
+  const T = translations[lang];
   const [index, setIndex] = useState(startIndex);
   const count = socialReviewPhotos.length;
 
@@ -161,17 +174,17 @@ function SocialModal({
       <button
         className="cursor-pointer absolute top-4 right-4 z-10 flex items-center gap-1.5 text-white/80 hover:text-white transition-colors text-sm"
         onClick={(e) => { e.stopPropagation(); onClose(); }}
-        aria-label="Закрити"
+        aria-label={T.testimonials_close}
       >
         <X className="w-5 h-5" />
-        <span>Закрити</span>
+        <span>{T.testimonials_close}</span>
       </button>
 
       {/* Prev — viewport-anchored left */}
       <button
         onClick={(e) => { e.stopPropagation(); prev(); }}
         className="cursor-pointer absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors shadow"
-        aria-label="Попередній відгук"
+        aria-label={T.testimonials_prev_aria}
       >
         <ChevronLeft className="w-6 h-6 text-stone-700" />
       </button>
@@ -183,7 +196,7 @@ function SocialModal({
       >
         <img
           src={socialReviewPhotos[index]}
-          alt={`Відгук у соцмережах ${index + 1}`}
+          alt={T.testimonials_social_alt(index + 1)}
           className="block max-h-[85vh] max-w-[calc(100vw-8rem)] w-auto object-contain bg-stone-900"
         />
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-xs">
@@ -195,7 +208,7 @@ function SocialModal({
       <button
         onClick={(e) => { e.stopPropagation(); next(); }}
         className="cursor-pointer absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors shadow"
-        aria-label="Наступний відгук"
+        aria-label={T.testimonials_next_aria}
       >
         <ChevronRight className="w-6 h-6 text-stone-700" />
       </button>
@@ -205,6 +218,8 @@ function SocialModal({
 
 /* ─── Social review card ──────────────────────────────────────────────────── */
 function SocialReviewCard({ onOpen }: { onOpen: (index: number) => void }) {
+  const { lang } = useLang();
+  const T = translations[lang];
   const [index, setIndex] = useState(0);
   const count = socialReviewPhotos.length;
   const prev = (e: React.MouseEvent) => {
@@ -225,13 +240,13 @@ function SocialReviewCard({ onOpen }: { onOpen: (index: number) => void }) {
         role="button"
         tabIndex={0}
         onKeyDown={(e) => e.key === "Enter" && onOpen(index)}
-        aria-label="Відкрити відгуки у соцмережах"
+        aria-label={T.testimonials_open_social_aria}
       >
         {socialReviewPhotos.map((src, i) => (
           <img
             key={src}
             src={src}
-            alt={`Відгук у соцмережах ${i + 1}`}
+            alt={T.testimonials_social_alt(i + 1)}
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-400 ${
               i === index ? "opacity-100" : "opacity-0 pointer-events-none"
             }`}
@@ -251,14 +266,14 @@ function SocialReviewCard({ onOpen }: { onOpen: (index: number) => void }) {
         <button
           onClick={prev}
           className="cursor-pointer absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center shadow hover:bg-white transition-colors z-10"
-          aria-label="Попередній відгук"
+          aria-label={T.testimonials_prev_aria}
         >
           <ChevronLeft className="w-4 h-4 text-stone-700" />
         </button>
         <button
           onClick={next}
           className="cursor-pointer absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center shadow hover:bg-white transition-colors z-10"
-          aria-label="Наступний відгук"
+          aria-label={T.testimonials_next_aria}
         >
           <ChevronRight className="w-4 h-4 text-stone-700" />
         </button>
@@ -273,14 +288,14 @@ function SocialReviewCard({ onOpen }: { onOpen: (index: number) => void }) {
         <QuoteMark />
 
         <p className="text-stone-700 text-sm leading-relaxed">
-          Відгуки наших покупців у переписках та соцмережах.
+          {T.testimonials_social_text}
         </p>
 
         <div className="flex items-center gap-2.5 pt-2.5 border-t border-stone-100 mt-auto">
           <div className="w-8 h-8 rounded-full bg-sage-100 flex items-center justify-center shrink-0">
             <span className="text-xs font-semibold text-sage-700">♡</span>
           </div>
-          <p className="text-sm font-semibold text-stone-800">Пряма мова</p>
+          <p className="text-sm font-semibold text-stone-800">{T.testimonials_social_label}</p>
         </div>
       </div>
     </div>
@@ -295,9 +310,13 @@ function TestimonialCard({
   testimonial: (typeof testimonials)[number];
   onPlay: () => void;
 }) {
+  const { lang } = useLang();
+  const T = translations[lang];
   const [expanded, setExpanded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const paragraphs = testimonial.text.split("\n\n");
+  const name = lang === "en" ? (testimonial.name_en ?? testimonial.name) : testimonial.name;
+  const text = lang === "en" ? (testimonial.text_en ?? testimonial.text) : testimonial.text;
+  const paragraphs = text.split("\n\n");
   const isLong = paragraphs.length > 2;
   const shown = expanded ? paragraphs : paragraphs.slice(0, 2);
 
@@ -320,11 +339,11 @@ function TestimonialCard({
         role="button"
         tabIndex={0}
         onKeyDown={(e) => e.key === "Enter" && onPlay()}
-        aria-label={`Переглянути відео від ${testimonial.name}`}
+        aria-label={T.testimonials_video_aria(name)}
       >
         <img
           src={testimonial.photo}
-          alt={`Відгук від ${testimonial.name}`}
+          alt={T.testimonials_review_alt(name)}
           className="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0"
           onError={(e) => {
             (e.target as HTMLImageElement).style.display = "none";
@@ -347,7 +366,7 @@ function TestimonialCard({
         </div>
         <div className="absolute bottom-3 left-3 flex items-center gap-1.5 bg-black/45 backdrop-blur-sm rounded-full px-2.5 py-1 group-hover:opacity-0 transition-opacity duration-300">
           <Play className="w-3 h-3 text-white" fill="white" />
-          <span className="text-white text-xs tracking-wide">Відео</span>
+          <span className="text-white text-xs tracking-wide">{T.testimonials_video_badge}</span>
         </div>
       </div>
 
@@ -368,18 +387,18 @@ function TestimonialCard({
             className="text-xs text-sage-600 hover:text-sage-800 transition-colors text-left"
             onClick={() => setExpanded(!expanded)}
           >
-            {expanded ? "Згорнути ▲" : "Читати далі ▼"}
+            {expanded ? T.testimonials_collapse : T.testimonials_read_more}
           </button>
         )}
 
         <div className="flex items-center gap-2.5 pt-2.5 border-t border-stone-100 mt-auto">
           <div className="w-8 h-8 rounded-full bg-sage-100 flex items-center justify-center shrink-0">
             <span className="text-xs font-semibold text-sage-700">
-              {testimonial.name.charAt(0)}
+              {name.charAt(0)}
             </span>
           </div>
           <p className="text-sm font-semibold text-stone-800">
-            {testimonial.name}
+            {name}
           </p>
         </div>
       </div>
@@ -389,6 +408,8 @@ function TestimonialCard({
 
 /* ─── Main section ────────────────────────────────────────────────────────── */
 export function Testimonials() {
+  const { lang } = useLang();
+  const T = translations[lang];
   const [activeVideo, setActiveVideo] = useState<{
     url: string;
     name: string;
@@ -408,13 +429,13 @@ export function Testimonials() {
       {/* Header — stays centered */}
       <FadeIn className="relative z-10 max-w-6xl mx-auto text-center mb-14">
         <span className="block text-[10px] tracking-[0.25em] uppercase text-sage-600 font-semibold mb-3">
-          Відгуки
+          {T.testimonials_label}
         </span>
         <h2 className="text-4xl md:text-5xl mb-4 text-stone-800">
-          Що кажуть покупці
+          {T.testimonials_h2}
         </h2>
         <p className="text-stone-500 text-lg max-w-2xl mx-auto">
-          Реальні враження від справжніх людей
+          {T.testimonials_subtitle}
         </p>
       </FadeIn>
 
@@ -425,7 +446,11 @@ export function Testimonials() {
             <TestimonialCard
               testimonial={t}
               onPlay={() =>
-                setActiveVideo({ url: t.videoUrl, name: t.name, text: t.text })
+                setActiveVideo({
+                  url: t.videoUrl,
+                  name: lang === "en" ? (t.name_en ?? t.name) : t.name,
+                  text: lang === "en" ? (t.text_en ?? t.text) : t.text,
+                })
               }
             />
           </FadeIn>
@@ -436,8 +461,7 @@ export function Testimonials() {
       </div>
 
       <p className="relative z-10 text-center text-stone-400 text-sm mt-8">
-        Усі відгуки — від реальних покупців. Фото та відео надіслані замовниками
-        особисто.
+        {T.testimonials_footer}
       </p>
 
       {/* Video modal */}

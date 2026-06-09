@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Main page -->
+  <url>
+    <loc>https://vssoap.com/</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://vssoap.com/?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vssoap.com/?lang=en"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Products -->
+  <url>
+    <loc>https://vssoap.com/?product=baby</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://vssoap.com/?product=baby&amp;lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vssoap.com/?product=baby&amp;lang=en"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vssoap.com/?product=aleppo</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://vssoap.com/?product=aleppo&amp;lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vssoap.com/?product=aleppo&amp;lang=en"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vssoap.com/?product=exotic</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://vssoap.com/?product=exotic&amp;lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vssoap.com/?product=exotic&amp;lang=en"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vssoap.com/?product=lavender</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://vssoap.com/?product=lavender&amp;lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vssoap.com/?product=lavender&amp;lang=en"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vssoap.com/?product=honey</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://vssoap.com/?product=honey&amp;lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vssoap.com/?product=honey&amp;lang=en"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vssoap.com/?product=wormwood</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://vssoap.com/?product=wormwood&amp;lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vssoap.com/?product=wormwood&amp;lang=en"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vssoap.com/?product=salt</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://vssoap.com/?product=salt&amp;lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vssoap.com/?product=salt&amp;lang=en"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vssoap.com/?product=rose</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://vssoap.com/?product=rose&amp;lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vssoap.com/?product=rose&amp;lang=en"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vssoap.com/?product=floral</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://vssoap.com/?product=floral&amp;lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vssoap.com/?product=floral&amp;lang=en"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vssoap.com/?product=strawberry</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://vssoap.com/?product=strawberry&amp;lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vssoap.com/?product=strawberry&amp;lang=en"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vssoap.com/?product=sets</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://vssoap.com/?product=sets&amp;lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vssoap.com/?product=sets&amp;lang=en"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>

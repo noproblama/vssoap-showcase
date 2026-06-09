@@ -1,17 +1,54 @@
 import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import { asset } from "../lib/asset";
+import { useLang } from "../i18n/LangContext";
+import { translations } from "../i18n/translations";
 
-const navLinks = [
-  { label: "Майстриня", href: "#founder" },
-  { label: "Каталог", href: "#products" },
-  { label: "Про майстерню", href: "#about" },
-  { label: "Відгуки", href: "#testimonials" },
-  { label: "Замовити", href: "#contact" },
-];
+function LangSwitcher({ scrolled }: { scrolled: boolean }) {
+  const { lang, setLang } = useLang();
+  return (
+    <div
+      className={`flex items-center rounded-full p-0.5 text-[11px] font-semibold tracking-wider transition-colors duration-300 ${
+        scrolled
+          ? "bg-stone-100 border border-stone-200"
+          : "bg-white/10 border border-white/25 backdrop-blur-sm"
+      }`}
+    >
+      {(["uk", "en"] as const).map((l) => (
+        <button
+          key={l}
+          onClick={() => setLang(l)}
+          aria-label={l === "uk" ? "Українська" : "English"}
+          className={`px-2.5 py-0.5 rounded-full transition-all duration-200 cursor-pointer ${
+            lang === l
+              ? scrolled
+                ? "bg-stone-800 text-white shadow-sm"
+                : "bg-white text-stone-800 shadow-sm"
+              : scrolled
+                ? "text-stone-500 hover:text-stone-700"
+                : "text-white/65 hover:text-white"
+          }`}
+        >
+          {l === "uk" ? "UA" : "EN"}
+        </button>
+      ))}
+    </div>
+  );
+}
 
 function Navbar({ scrolled }: { scrolled: boolean }) {
+  const { lang } = useLang();
+  const T = translations[lang];
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const navLinks = [
+    { label: T.nav_artisan, href: "#founder" },
+    { label: T.nav_catalogue, href: "#products" },
+    { label: T.nav_about, href: "#about" },
+    { label: T.nav_reviews, href: "#testimonials" },
+    { label: T.nav_order, href: "#contact" },
+  ];
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
@@ -19,11 +56,7 @@ function Navbar({ scrolled }: { scrolled: boolean }) {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a
-          href="#"
-          aria-label="VS Soap — на початок"
-          onClick={() => setMenuOpen(false)}
-        >
+        <a href="#" aria-label={T.logo_aria} onClick={() => setMenuOpen(false)}>
           <img
             src={asset("VSsoap-logo.svg")}
             alt="VS Soap"
@@ -50,20 +83,28 @@ function Navbar({ scrolled }: { scrolled: boolean }) {
               {l.label}
             </a>
           ))}
+          <LangSwitcher scrolled={scrolled} />
         </div>
 
-        {/* Mobile: hamburger button */}
-        <button
-          className={`flex md:hidden p-2 rounded-lg transition-colors ${
-            scrolled
-              ? "text-stone-700 hover:text-stone-900 hover:bg-white/40"
-              : "text-white/90 hover:text-white hover:bg-white/10"
-          }`}
-          onClick={() => setMenuOpen((o) => !o)}
-          aria-label="Меню"
-        >
-          {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+        {/* Mobile: hamburger + lang */}
+        <div className="flex md:hidden items-center gap-2">
+          <LangSwitcher scrolled={scrolled} />
+          <button
+            className={`flex p-2 rounded-lg transition-colors ${
+              scrolled
+                ? "text-stone-700 hover:text-stone-900 hover:bg-white/40"
+                : "text-white/90 hover:text-white hover:bg-white/10"
+            }`}
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label={T.nav_menu_aria}
+          >
+            {menuOpen ? (
+              <X className="w-5 h-5" />
+            ) : (
+              <Menu className="w-5 h-5" />
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Mobile dropdown */}
@@ -86,6 +127,8 @@ function Navbar({ scrolled }: { scrolled: boolean }) {
 }
 
 export function Hero() {
+  const { lang } = useLang();
+  const T = translations[lang];
   const [scrolled, setScrolled] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -121,34 +164,28 @@ export function Hero() {
           >
             <source src={asset("soap-presentation.mp4")} type="video/mp4" />
           </video>
-          {/* Gradient: transparent at top, solid at bottom behind text */}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-stone-50/40 to-stone-50" />
           <div className="absolute inset-0 bg-gradient-to-r from-stone-50/70 via-stone-50/20 to-transparent" />
         </div>
 
-        {/* Hero content — bottom-left */}
+        {/* Hero content */}
         <div className="relative z-10 px-6 md:px-12 lg:px-16 pt-20 pb-14 md:pt-0 md:pb-32 max-w-2xl">
-          {/* Pill badge */}
           <div className="inline-flex items-center gap-2 mb-4 md:mb-6 px-4 py-1.5 rounded-full bg-white/55 backdrop-blur-sm border border-stone-200/70 text-stone-600 text-sm">
-            Трави з Черкащини · Природні барвники · Натуральні ефірні олії
+            {T.hero_badge}
           </div>
 
-          {/* Main heading */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl mb-4 md:mb-5 text-stone-800 leading-[1.05] tracking-tight">
-            Створюю мило
+            {T.hero_h1_1}
             <br />
-            із <em>власноруч</em>
+            {T.hero_h1_2} <em>{T.hero_h1_em}</em>
             <br />
-            зібраних трав
+            {T.hero_h1_3}
           </h1>
 
-          {/* Tagline */}
           <p className="text-sm md:text-lg text-stone-600 mb-6 md:mb-10 font-light tracking-wide leading-relaxed">
-            Холодне омилення. Витримка від 6 тижнів до 6 місяців. Турбота про
-            Ваше здоровʼя та красу.
+            {T.hero_tagline}
           </p>
 
-          {/* CTA row */}
           <div className="flex flex-col sm:flex-row gap-3 justify-start">
             <a
               href="#products"
@@ -161,7 +198,7 @@ export function Hero() {
                     "linear-gradient(to right, #414a39, #414a39 67%, transparent 100%)",
                 }}
               />
-              <span className="relative z-10">Переглянути вироби</span>
+              <span className="relative z-10">{T.hero_cta_browse}</span>
             </a>
             <a
               href="#contact"
@@ -174,21 +211,19 @@ export function Hero() {
                     "linear-gradient(to right, #4f5b45, #4f5b45 67%, transparent 100%)",
                 }}
               />
-              <span className="relative z-10">Як замовити</span>
+              <span className="relative z-10">{T.hero_cta_order}</span>
             </a>
           </div>
         </div>
 
-        {/* Scroll hint — centered at bottom */}
         <a
           href="#founder"
           className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden sm:flex flex-col items-center gap-3 group"
-          aria-label="Гортати вниз"
+          aria-label={T.hero_scroll_aria}
         >
           <span className="text-[10px] tracking-[0.22em] uppercase text-stone-500/80 group-hover:text-stone-700 transition-colors">
-            Гортайте
+            {T.hero_scroll}
           </span>
-          {/* Animated line: scaleY pulses from top, fades to transparent at bottom */}
           <span
             className="block w-px h-12 origin-top animate-scroll-hint"
             style={{

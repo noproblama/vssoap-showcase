@@ -3,6 +3,8 @@ import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import { SoapWaveBg } from "./DecorativeElements";
 import { FadeIn } from "./FadeIn";
 import { asset } from "../lib/asset";
+import { useLang } from "../i18n/LangContext";
+import { translations } from "../i18n/translations";
 
 // ── Increment to include a new creator_N.webp in public/
 const CREATOR_COUNT = 8;
@@ -156,6 +158,9 @@ function CreatorCarousel() {
 }
 
 export function About() {
+  const { lang } = useLang();
+  const T = translations[lang];
+
   return (
     <section
       className="relative py-20 px-6 bg-[#F4F4F4] overflow-hidden"
@@ -168,13 +173,13 @@ export function About() {
       <div className="relative z-10 max-w-4xl mx-auto">
         <FadeIn>
           <span className="block text-center text-[10px] tracking-[0.25em] uppercase text-sage-600 font-semibold mb-3">
-            Майстерня
+            {T.about_label}
           </span>
           <h2 className="text-4xl md:text-5xl text-center mb-4 text-stone-800">
-            Про майстерню
+            {T.about_h2}
           </h2>
           <p className="text-center text-stone-600 mb-12 text-lg">
-            Мистецтво, що зцілює шкіру та турбується про ваше здоров'я
+            {T.about_subtitle}
           </p>
         </FadeIn>
 
@@ -183,117 +188,42 @@ export function About() {
             <CreatorCarousel />
 
             <AccordionItem
-              title="Суть нашого ремесла"
-              summary="Ми не «варимо» мило — ми створюємо його за автентичною технологією холодного омилення, зберігаючи всі живильні властивості олій."
+              title={T.about_acc1_title}
+              summary={T.about_acc1_summary}
             >
-              <p className="text-stone-600 leading-relaxed mb-3">
-                Це процес, де природа і хімія зустрічаються без поспіху. Ми
-                поєднуємо рослинні олії та лужний розчин за кімнатної
-                температури, щоб зберегти вітаміни і живильну молекулу,
-                подаровану землею.
-              </p>
-              <p className="text-stone-600 leading-relaxed mb-3">
-                Чому наш «холодний спосіб» — це магія? На відміну від
-                промислового мила, ми не вилучаємо гліцерин. Він залишається
-                всередині, створюючи на шкірі невидимий захисний бар'єр.
-              </p>
-              <p className="text-stone-600 leading-relaxed">
-                Олії (ши, какао, оливкова, кокосова, пальмова, мигдальна,
-                жожоба, абрикосових кісточок, обліпихова та інші), мацерати
-                (оливкова олія, настояна на травах та квітах), відвари трав та
-                екстракти квітів не піддаються кип'ятінню — ваша шкіра отримує
-                порцію доглядових олій, що не змилися в процесі реакції, та
-                комплекс поживних речовин.
-              </p>
+              <p className="text-stone-600 leading-relaxed mb-3">{T.about_acc1_p1}</p>
+              <p className="text-stone-600 leading-relaxed mb-3">{T.about_acc1_p2}</p>
+              <p className="text-stone-600 leading-relaxed">{T.about_acc1_p3}</p>
             </AccordionItem>
 
             <AccordionItem
-              title="Витримка від 6 тижнів до 6 місяців"
-              summary="Кожен брусок «дозріває» понад місяць у спеціальних умовах."
+              title={T.about_acc2_title}
+              summary={T.about_acc2_summary}
             >
-              <p className="text-stone-600 leading-relaxed">
-                За цей час він стає твердим, ніжним та безпечним — як витримане
-                вино. Тільки після повного дозрівання мило потрапляє до вас.
-              </p>
+              <p className="text-stone-600 leading-relaxed">{T.about_acc2_body}</p>
             </AccordionItem>
 
             <AccordionItem
-              title="Наші принципи — чистота у всьому"
-              summary="Жодних промислових ПАРів (SLS), парабенів чи штучних піноутворювачів — тільки натуральне."
+              title={T.about_acc3_title}
+              summary={T.about_acc3_summary}
             >
-              <p className="text-stone-600 leading-relaxed mb-3">
-                Ми фарбуємо мило глинами, травами та спеціями. Аромат дарують
-                лише 100% чисті ефірні олії, а не дешеві віддушки.
-              </p>
-              <p className="text-stone-600 leading-relaxed">
-                Ми дбаємо про планету так само, як про ваше тіло. Наше пакування
-                — це папір, джут, натуральна деревина і жодного грама пластику.
-              </p>
+              <p className="text-stone-600 leading-relaxed mb-3">{T.about_acc3_p1}</p>
+              <p className="text-stone-600 leading-relaxed">{T.about_acc3_p2}</p>
             </AccordionItem>
 
             <AccordionItem
-              title="Для кого ми створюємо?"
-              summary="Для тих, хто стомився від хімії та хоче справжнього догляду — простого, чистого, природного."
+              title={T.about_acc4_title}
+              summary={T.about_acc4_summary}
             >
               <ul className="text-stone-600 leading-relaxed space-y-2 mb-5">
-                <li className="flex gap-2">
-                  <span className="shrink-0">—</span>
-                  <span>
-                    стомився від відчуття стягнутості шкіри після душу;
-                  </span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="shrink-0">—</span>
-                  <span>
-                    має чутливу шкіру і розуміє, що справжнє зволоження
-                    починається з дбайливого очищення без синтетичних ПАР;
-                  </span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="shrink-0">—</span>
-                  <span>
-                    цінує естетику в деталях, перетворює звичайне миття рук на
-                    маленький ритуал любові до себе і обирає свідоме споживання;
-                  </span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="shrink-0">—</span>
-                  <span>
-                    читає склад раніше, ніж назву і обирає безпеку для своєї
-                    шкіри та планети;
-                  </span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="shrink-0">—</span>
-                  <span>
-                    прагне жити в гармонії з природою, відмовляючись від зайвої
-                    хімії на користь чистих рослинних олій;
-                  </span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="shrink-0">—</span>
-                  <span>
-                    цінує чесність складу: лише омилені олії, глини, трави,
-                    ефірні екстракти — лише те, що дає природа;
-                  </span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="shrink-0">—</span>
-                  <span>бачить не просто форму, а відчуває душу;</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="shrink-0">—</span>
-                  <span>
-                    обирає справжнє замість штучного, цінує здоров'я своєї шкіри
-                    та вірить, що розкіш криється у простоті та натуральності.
-                  </span>
-                </li>
+                {T.about_acc4_items.map((item, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="shrink-0">—</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
               </ul>
-              <p className="text-stone-600 leading-relaxed italic">
-                Наше творіння — це гігієна та ранковий ритуал любові до себе,
-                втілений у шматочку шовковистої піни. Кожен брусок мила —
-                унікальна композиція, новий спа досвід.
-              </p>
+              <p className="text-stone-600 leading-relaxed italic">{T.about_acc4_closing}</p>
             </AccordionItem>
           </div>
         </FadeIn>

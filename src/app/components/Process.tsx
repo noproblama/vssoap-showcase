@@ -1,36 +1,14 @@
 import { asset } from "../lib/asset";
 import { FadeIn } from "./FadeIn";
 import { BotanicalPatternBg } from "./DecorativeElements";
+import { useLang } from "../i18n/LangContext";
+import { translations } from "../i18n/translations";
 
-const steps = [
-  {
-    step: "Крок 1",
-    time: "Тиждень 1",
-    title: "збираю та готую",
-    body: "Підбираю олії, відмірюю до грама, готую мацерати трав. З лугом обрежно, тож як годиться — окуляри, рукавички, віконце відчинене.",
-    media: asset("process-prepare.mp4"),
-  },
-  {
-    step: "Крок 2",
-    time: "Тиждень 1",
-    title: "змішую та заливаю",
-    body: "Олії та лужний розчин з'єднуються при кімнатній температурі — це і є «холодне омилення». Доливаю ефірки, додаю глини, виливаю у форми.",
-    media: asset("process-mix.mp4"),
-  },
-  {
-    step: "Крок 3",
-    time: "Тиждень 2",
-    title: "ріжу та підрівнюю краї",
-    body: "Через 24 години ріжу на бруски — у цей момент ще можна пальцем продавити. А щоб мило було охайним, охайно підрівнюю кожен бік.",
-    media: asset("process-cut.mp4"),
-  },
-  {
-    step: "Крок 4",
-    time: "Тиждень 6 – 6 міс.",
-    title: "дозріває та йде до вас",
-    body: "Бруски лежать на полицях у спеціальній комірчині, втрачають вологу, стають твердими. Алепське чекає по 6+ місяців. Готові — пакую в крафт і відправляю.",
-    media: asset("process-cure.mp4"),
-  },
+const stepMedia = [
+  asset("process-prepare.mp4"),
+  asset("process-mix.mp4"),
+  asset("process-cut.mp4"),
+  asset("process-cure.mp4"),
 ];
 
 function StepMedia({ src, title }: { src: string; title: string }) {
@@ -67,6 +45,10 @@ function StepMedia({ src, title }: { src: string; title: string }) {
 }
 
 export function Process() {
+  const { lang } = useLang();
+  const T = translations[lang];
+  const steps = T.process_steps.map((s, i) => ({ ...s, media: stepMedia[i] }));
+
   return (
     <section
       className="relative py-20 md:py-28 px-6 overflow-hidden"
@@ -83,14 +65,13 @@ export function Process() {
       <div className="relative z-10 max-w-6xl mx-auto">
         <FadeIn>
           <span className="block text-center text-[10px] tracking-[0.25em] uppercase text-sage-600 font-semibold mb-4">
-            Як це народжується
+            {T.process_label}
           </span>
           <h2 className="text-4xl md:text-5xl text-center mb-5 text-stone-800 leading-tight">
-            Від олії до бруска —<br className="hidden sm:block" /> від 6 тижнів.
+            {T.process_h2_1}<br className="hidden sm:block" /> {T.process_h2_2}
           </h2>
           <p className="text-center text-stone-500 mb-16 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
-            Промислове мило роблять за 4 години. Моє — мінімум 42 дні. Різниця в
-            тому, що залишається всередині.
+            {T.process_subtitle}
           </p>
         </FadeIn>
 
